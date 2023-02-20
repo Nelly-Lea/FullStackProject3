@@ -1,0 +1,117 @@
+.active_page{
+    display: block;
+}
+
+.page{
+   display: none;
+    width: 100%;
+    min-height: 100%; /* allow for content off the bottom of the page */
+    position: fixed;  /* or absolute if the user needs to scroll for more content */
+    padding: 1rem 2rem;
+}
+
+/* style home page*/
+
+#site_title{
+    font-family: 'Pacifico';font-size: 50px;
+    margin: auto;
+    align-content: center;
+    align-items: center;
+    margin-left: 450px;
+    font-weight: bold;
+}
+.navbar { 
+    overflow: hidden; 
+    background-color: #f7f5f7; 
+    margin-right: 10px;
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 85%;
+    /* margin: 10px;  */
+    border-radius: 25px; 
+    
+  } 
+   
+  /* Links inside the navbar */ 
+  .navbar a { 
+    float: left; 
+    font-size: 20px; 
+    color: #5D5E60; 
+    text-align: center; 
+    padding: auto; 
+    text-decoration: none; 
+    font-family: 'Orbitron', sans-serif;
+  } 
+   
+  .navbarul { 
+    list-style-type: none; 
+    margin: 15; 
+    padding: 0; 
+    overflow: hidden; 
+  } 
+   
+  .navbarul li { 
+    float: left; 
+    padding-left: 10px; 
+    padding-right: 10px; 
+  } 
+   
+  .navbarul li a { 
+    display: block; 
+    text-align: center; 
+    padding-right:  16px; 
+    padding-left: 16px; 
+    text-decoration: none; 
+  } 
+
+  .slowFade {
+    display: flex;
+    align-items: flex-start;
+    /* background: #fff; */
+    height: 90vh;
+   
+    position: relative;
+  }
+  .slowFade .slide img {
+    position: absolute;
+    min-width: 100%;
+    max-height: 100%;
+    width: 100%;
+    height: auto;
+    background: #000;
+    opacity: 0;
+    animation: slowFade 48s infinite;
+    justify-content: center;
+  }
+  .slowFade .slide:nth-child(2) img {
+            animation-delay: 8s;
+  }
+  .slowFade .slide:nth-child(3) img {
+    
+            animation-delay: 16s;
+  }
+  /* .slowFade .slide:nth-child(4) img {
+    animation-delay: 24s;
+        
+  }
+  .slowFade .slide:nth-child(5) img {
+    animation-delay: 32s;
+        
+  }
+  
+  .slowFade .slide:nth-child(6) img {
+    animation-delay: 40s;
+        
+  } */
+  @keyframes slowFade {
+    25% {
+        opacity: 1;
+        
+    }
+    40% {
+        opacity: 0;
+    }
+  }
+  
+   
