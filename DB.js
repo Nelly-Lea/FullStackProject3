@@ -4,17 +4,21 @@ var guest={
     mail:'',
     phone_number:'',
     family_member:0,
-    coming:false
+    coming:false,
+    list_manager:''
 }
+
+//rajouter object user 
 var current_guest=null;
 
-function Guest(last_name, first_name, mail, phone_number, family_number, coming){
+function Guest(last_name, first_name, mail, phone_number, family_number, coming, list_manager){
     this.last_name=last_name;
     this.first_name=first_name;
     this.mail=mail;
     this.phone_number=phone_number;
     this.family_number=family_number;
     this.coming=coming;
+    this.list_manager=list_manager;
 }
 
 function add_guest(last_name,first_name,mail, phone_number, family_member, coming){

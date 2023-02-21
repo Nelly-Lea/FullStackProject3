@@ -121,6 +121,9 @@
     background:#c8c8c8;
     font-family: 'Pacifico';font-size: 50px;
   }
+  
+
+
   *,:after,:before{box-sizing:border-box}
   .clearfix:after,.clearfix:before{content:'';display:table}
   .clearfix:after{clear:both;display:block}
@@ -271,4 +274,38 @@
   }
   
   
-   
+  /*style de guest list page*/
+
+  #username_div{
+    float: right;
+    margin-right: 20px;
+    display:inline-block;
+    font-weight: bold;
+  
+  }
+  #log_out_icone{
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+  
+  }
+
+  .label_choice{
+    font-size: 20px;
+    font-weight: bold;
+    font-family: "Candara";
+    
+    }
+
+    #list_select{
+        width:35px;
+        height: 30px;
+        }
+
+    #add_guest{
+        background-color: lightcoral;
+    }
+
+    .form_title{
+        text-align: center;
+    }

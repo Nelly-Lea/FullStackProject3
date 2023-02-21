@@ -1,12 +1,16 @@
-function showContent() {
-    var temp = document.getElementsByTagName("template")[0];
-    var clon = temp.content.cloneNode(true);
-    document.body.appendChild(clon);
-    // var temp1=document.getElementsByTagName("template")[1];
-    // var clon1 = temp1.content.cloneNode(true);
-    // document.body.appendChild(clon1);
-  }
+// function showContent() {
+//     var temp = document.getElementsByTagName("template")[0];
+//     var clon = temp.content.cloneNode(true);
+//     document.body.appendChild(clon);
+//     // var temp1=document.getElementsByTagName("template")[1];
+//     // var clon1 = temp1.content.cloneNode(true);
+//     // document.body.appendChild(clon1);
+//   }
+
+var button_add_guest=document.getElementById("button_add_guest")
+//button_add_guest.addEventListener("click",add_guest);
   var current_page=null;
+  var current_page_div=null;
   const app = {
     pages: [],
     show: new Event('show'),
@@ -25,6 +29,7 @@ function showContent() {
          })
  
         current_page="#home"
+        current_page_div="#home_div"
         // temps=document.querySelectorAll('template');
         // t=temps[0].content.querySelector('#nav_sign')
         // temps[0].content.querySelector('#nav_sign').addEventListener('click', app.nav);
@@ -46,14 +51,18 @@ function showContent() {
     nav: function(ev){
          ev.preventDefault();
          let currentPage= ev.target.getAttribute('data-target');
-          temp1=document.querySelector(current_page)
+          temp1=document.querySelector(current_page_div)
           document.body.removeChild(temp1);
           current_page='#'+currentPage;
+          current_page_div=current_page+"_div"
          temp2=document.getElementById(currentPage)
          var clon2 = temp2.content.cloneNode(true);
          document.body.appendChild(clon2);
          console.log(currentPage)
          history.pushState({}, currentPage, `#${currentPage}`);
+         document.querySelectorAll(".nav-link").forEach((item)=>{
+            item.addEventListener('click', app.nav);
+         })
          document.getElementById(currentPage).dispatchEvent(app.show);
        
     },
@@ -65,15 +74,25 @@ function showContent() {
         //     h.classList.remove('big');
         // }, 1200, h1);
     },
-    // poppin: function(ev){
-    //     console.log(location.hash, 'popstate event');
-    //     let hash = location.hash.replace('#' ,'');
-    //     document.querySelector('.active').classList.remove('active');
-    //     document.getElementById(hash).classList.add('active');
-    //     console.log(hash)
-    //     //history.pushState({}, currentPage, `#${currentPage}`);
-    //     document.getElementById(hash).dispatchEvent(app.show);
-    // }
+    poppin: function(ev){
+        console.log(location.hash, 'popstate event');
+        let hash = location.hash.replace('#' ,'');
+        temp1=document.querySelector(current_page_div)
+        document.body.removeChild(temp1);
+        //document.querySelector('.active').classList.remove('active');
+        current_page=hash;
+        current_page_div="#"+current_page+"_div"
+        temp2=document.getElementById(current_page)
+        var clon2 = temp2.content.cloneNode(true);
+         document.body.appendChild(clon2);
+        //document.getElementById(hash).classList.add('active');
+        console.log(hash)
+        //history.pushState({}, currentPage, `#${currentPage}`);
+        document.querySelectorAll(".nav-link").forEach((item)=>{
+            item.addEventListener('click', app.nav);
+         })
+        document.getElementById(hash).dispatchEvent(app.show);
+    }
 }
 
 document.addEventListener('DOMContentLoaded', app.init);
@@ -150,6 +169,7 @@ function store(){
         
         //localStorage.setItem(name.value, pw.value);
         alert('Your account has been created');
+
     }
 }
 
@@ -160,6 +180,9 @@ function check(){
 
     var userEmail = document.getElementById('userMail');
     var userPw = document.getElementById('userPw');
+    console.log(userEmail.value)
+    console.log(userPw.value)
+
 
     //var storedPw = localStorage.getItem(userName.value);
     //var storedPw = window.localStorage.getItem(userName.value);
