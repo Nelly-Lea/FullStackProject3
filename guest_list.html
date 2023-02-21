@@ -64,6 +64,17 @@
     <template class="page" id="about_us">
         <div   >
             <h1>ABOUT US PAGE</h1>
+            <div class="navbar">
+                <nav>
+                    <ul class="navbarul">
+                        <li><a href="#">🏠 Home</a></li>
+                        <li><a href="#" data-target="contact" class="nav-link" >📞 Contact</a></li>
+                        <li><a href="#" data-target="about_us" class="nav-link">About Us</a></li>
+                        <li><a href="#" data-target="sign_in" class="nav-link">Sign In</a></li>
+                        <li><a href="#" data-target="sign_up" class="nav-link">Sign Up</a></li>
+                    </ul>
+                </nav>
+            </div> 
             <ol>
                 <li><a href="#" data-target="home" class="nav-link">HOME</a></li>
                 <li><a href="#" data-target="sign_up" class="nav-link">SIGN_UP</a></li>
@@ -89,6 +100,81 @@
                 <li><a href="#" data-target="sign_up" class="nav-link">SIGN_UP</a></li>
                 <li><a href="#" data-target="guest_list" class="nav-link">GUEST LIST PAGE</a></li>
             </ol>
+            <div class="login-wrap">
+            
+                <div class="login-html">
+                    <div class="title">
+                       
+                        
+                    </div>
+                    <br>
+                    <br>
+                    <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign In</label>
+                    <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Sign Up</label>
+                    
+                    <div  class="login-form">
+                    
+                       <form name='form-login'>
+                            <div class="sign-in-htm">
+            
+                                <div class="group">
+                                    <label for="userEmail" class="label">Email</label>
+                                    <input type="email" class="input" id="userMail" placeholder="UserMail" required>
+                                </div>
+                                <div class="group">
+                                    <label for="userPw" class="label">Password</label>
+                                    <input type="password" class="input" id= "userPw" placeholder="Password" required>
+                                </div>
+                                <div class="group">
+                                    <input id= "login_btn" class="button" type="submit" value="Sign In" onclick="check()">
+                                </div>
+            
+                            
+            
+                            </div>
+                        </form>
+                        <form name='form-login'>
+                            <div class="sign-up-htm">
+                                
+            
+                                <div class="group">
+                                    <label for="name" class="label">Name</label>
+                                    <input type="text" id="name" class="input" placeholder="Username" required>
+                                </div>
+                                <div class="group">
+                                    <label for="email" class="label">Email</label>
+                                    <input type="email" class="input" id= "email" placeholder="Email" required>
+                                 </div>
+            
+                                <div class="group">
+                                    <label for="pw" class="label">Password</label>
+                                    <input type="password" class="input" id= "pw" placeholder="Password" required>
+                                 </div>
+            
+                                 <div class="group">
+                                    <label for="pw" class="label">Repeat Password</label>
+                                    <input type="password" class="input" id= "repeat_pw" placeholder="Confirm Password" required >
+                                 </div>
+            
+                                <ul class="helper-text">
+                                    <li class="lowercase">Must contain a lowercase letter.</li>
+                                    <li class="uppercase">Must contain an uppercase letter.</li>
+                                    <li class="special">Must contain a number or special character.</li>
+                                </ul>
+                                <div class="group">
+                                    <input id="rgstr_btn" class="button" type="submit" value="Sign Up" onclick="store()">
+                                </div>
+                                
+                                <div class="hr"></div>
+                                <div class="foot-lnk">
+                                    <label for="tab-1">Already Member?</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
         </div>
     </template>
    <template class="page" id="guest_list">
