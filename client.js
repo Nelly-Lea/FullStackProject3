@@ -1,3 +1,7 @@
+//import {FXMLHttpRequest} from './FXMLHttpRequest.js';
+
+//const FXMLHttpRequest = require('./FXMLHttpRequest.js');
+
 // function showContent() {
 //     var temp = document.getElementsByTagName("template")[0];
 //     var clon = temp.content.cloneNode(true);
@@ -108,26 +112,26 @@ function store(){
     var upperCaseLetters = /[A-Z]/g;
     var numbers = /[0-9]/g;
    
-    for(let key in localStorage){
-        if(key.includes('@')){
-            let user=JSON.parse(window.localStorage.getItem(key)).name;
-            console.log(user);
-            if(user==name.value){
-                alert('This name is already in use');
-                return false;
-            }
-        }
-    }
+    // for(let key in localStorage){
+    //     if(key.includes('@')){
+    //         let user=JSON.parse(window.localStorage.getItem(key)).name;
+    //         console.log(user);
+    //         if(user==name.value){
+    //             alert('This name is already in use');
+    //             return false;
+    //         }
+    //     }
+    // }
 
-    for(let key in localStorage){
-        if(key.includes('@')){
-            console.log(key);
-            if(key==email.value){
-                alert('This email is already registered');
-                return false;
-            }
-        }
-    }
+    // for(let key in localStorage){
+    //     if(key.includes('@')){
+    //         console.log(key);
+    //         if(key==email.value){
+    //             alert('This email is already registered');
+    //             return false;
+    //         }
+    //     }
+    // }
 
     if(name.value.length == 0){
         alert('Please fill in name');
@@ -150,24 +154,38 @@ function store(){
     }else if(pw.value!=repeatpw.value){
         alert('passwords do not match');
     }else{
-        var newDate = new Date();
-        var datetime =newDate.getDate()+'/'+newDate.getMonth()+'-'+newDate.getHours()+':'+newDate.getMinutes();
-        console.log(datetime);
-        var User = {
-            name:name.value,
-            pw: pw.value,
-            datetime: datetime,
-            score_2048:0,
-            score_Platformer:0,
-            number_of_times_played_Platformer:0,
-            number_of_times_played_2048:0,
-            tries_left:3
+        // var newDate = new Date();
+        // var datetime =newDate.getDate()+'/'+newDate.getMonth()+'-'+newDate.getHours()+':'+newDate.getMinutes();
+        // console.log(datetime);
+        // var User = {
+        //     name:name.value,
+        //     pw: pw.value,
+        //     datetime: datetime,
+        //     score_2048:0,
+        //     score_Platformer:0,
+        //     number_of_times_played_Platformer:0,
+        //     number_of_times_played_2048:0,
+        //     tries_left:3
 
-        };
+        // };
 
-        localStorage.setItem(email.value, JSON.stringify(User));
+        // localStorage.setItem(email.value, JSON.stringify(User));
         
         //localStorage.setItem(name.value, pw.value);
+
+        var new_user ={
+            type:"user",
+            name:name.value,
+            mail:email.value,
+            password:pw.value
+        }
+        var new_user_json=JSON.stringify(new_user);
+
+        var fxhttp=new FXMLHttpRequest();
+        fxhttp.open("POST","./DB_API.js",true);
+        fxhttp.send(new_user_json);
+        
+
         alert('Your account has been created');
 
     }
