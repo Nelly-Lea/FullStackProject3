@@ -2,6 +2,7 @@
 //import { Network } from './network.js';
 class FXMLHttpRequest{
     response=null;
+    responseText="";
     readyState=0;//etat de la connection
     status=0; // status de la reponse 
     onload=null;// fonction qui verifie les statuts et met la reponse
@@ -22,7 +23,7 @@ class FXMLHttpRequest{
             this.onload=(e) => {
                 if (this.readyState === 4) {
                      if (this.status === 200) {
-                       return 
+                       return this.response;
                 } 
                 else {
                   console.log(this.status);
@@ -34,7 +35,7 @@ class FXMLHttpRequest{
             this.onload =()=>{
     
             if (this.status === 200) {
-                return }
+                return this.response;}
             else{
                 console.log(this.status)
             }

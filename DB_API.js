@@ -52,7 +52,8 @@ var user={
     password:''
 
 }
-
+ 
+var current_user=null;
 
 
  function add_user(user_json){
@@ -67,7 +68,32 @@ var user={
         list_users_array.push(new_user);
         localStorage.setItem("list_users",JSON.stringify(list_users_array))
     }
+    user_current=JSON.parse(localStorage.getItem("current_user"));
+    current_user=new_user;
+    if(user_current!=null){
+        localStorage.removeItem("current_user");
+        localStorage.setItem("current_user", JSON.stringify(current_user))
+    }
+    else{
+        localStorage.setItem("current_user", JSON.stringify(current_user));
+    }
     
     
+}
 
+function get_user(user_json){
+    var list_users=[]
+    list_users=JSON.parse(localStorage.getItem("list_users"));
+    var user_obj=JSON.parse(user_json)
+         
+    for(var i = 0; i < list_users.length; i++) {
+        if((user_obj.mail==list_users[i].mail)&&(user_obj.password==list_users[i].password)){
+            current_user=list_users[i];
+            localStorage.removeItem("current_user");
+            localStorage.setItem("current_user", JSON.stringify(current_user));
+            return list_users[i];
+        }  
+    }
+    return null;
+    
 }

@@ -101,7 +101,7 @@ var button_add_guest=document.getElementById("button_add_guest")
 
 document.addEventListener('DOMContentLoaded', app.init);
 
-// java de sign 
+// java de sign_up 
 function store(){
 
     var name = document.getElementById('name');
@@ -198,71 +198,43 @@ function check(){
 
     var userEmail = document.getElementById('userMail');
     var userPw = document.getElementById('userPw');
-    console.log(userEmail.value)
-    console.log(userPw.value)
-
-
-    //var storedPw = localStorage.getItem(userName.value);
-    //var storedPw = window.localStorage.getItem(userName.value);
-    var obj=JSON.parse(window.localStorage.getItem(userEmail.value));
-    console.log(obj);
-
-    // var userRemember = document.getElementById("rememberMe");
-
-    // console.log(userEmail.value);
-    // console.log(userPw.value);
-    // console.log(obj);
     
-        if(userEmail.value != 'undefined' && obj!=null){
-        
-        
-                if( userPw.value == obj.pw ){
-                    localStorage.setItem('current user', userEmail.value);
-                    var newDate = new Date();
-                    var datetime = newDate.getDate()+'/'+newDate.getMonth()+'-'+newDate.getHours()+':'+newDate.getMinutes();
-                    console.log(datetime);
-                    console.log(obj.name);
-                    console.log(obj.name.value);
-            
-
-                    obj.datetime=datetime;
-                    obj.tries_left = 3;
-                    console.log(obj.name);
-                    console.log(obj.datetime);
-
-                    localStorage.setItem(userEmail.value, JSON.stringify(obj));
-                    doc=window.open("home_screen.html");
-                    doc.write(checkCookie());
-                    
-                }
-                else{
-                    if(obj.tries_left>0)
-                    {
-                    obj.tries_left = obj.tries_left -1;
-                    localStorage.setItem(userEmail.value, JSON.stringify(obj));
-                    alert("Login Failed Now Only "+obj.tries_left+" Login Attempts Available");
-                    }
-                    else
-                    {
-                    obj.tries_left=0;
-                    localStorage.setItem(userEmail.value, JSON.stringify(obj));
-                    alert("Your account is blocked for 30 seconds!")
-                    setTimeout(check, 10000);
-                    obj.tries_left = 3;
-                    localStorage.setItem(userEmail.value, JSON.stringify(obj));
-                    }
-                    
-                    }
-            
-        
-        
-        
+   
+    var user_to_search ={
+        type:"user",
+        name:"",
+        mail:userEmail.value,
+        password:userPw.value
     }
-        
-        else{
-            alert('Error on login');
-            
-        }
+    var user_to_search_json=JSON.stringify(user_to_search);
+
+
+    var fxhttp=new FXMLHttpRequest();
+    fxhttp.open("GET","./DB_API.js",true);
+    fxhttp.send(user_to_search_json);
+    var rep=fxhttp.onload();
+    if(rep!=null){
+        // aller page guest
+        let currentPage= "guest_list";
+          temp1=document.querySelector(current_page_div)
+          document.body.removeChild(temp1);
+          current_page='#'+currentPage;
+          current_page_div=current_page+"_div"
+         temp2=document.getElementById(currentPage)
+         var clon2 = temp2.content.cloneNode(true);
+         document.body.appendChild(clon2);
+         console.log(currentPage)
+         history.pushState({}, currentPage, `#${currentPage}`);
+         document.querySelectorAll(".nav-link").forEach((item)=>{
+            item.addEventListener('click', app.nav);
+         })
+         document.getElementById(currentPage).dispatchEvent(app.show);
+    }
+    else{
+        //rester meme page
+    }
+    
+ 
 
 }
 // java de contact us
@@ -311,3 +283,71 @@ form.addEventListener("submit", function (e) {
       }, 5000);
     });
 });
+//////
+
+//ds la fonction check de sign_in
+  // console.log(userEmail.value)
+    //console.log(userPw.value)
+
+
+    //var storedPw = localStorage.getItem(userName.value);
+    //var storedPw = window.localStorage.getItem(userName.value);
+    //var obj=JSON.parse(window.localStorage.getItem(userEmail.value));
+    //console.log(obj);
+
+    // var userRemember = document.getElementById("rememberMe");
+
+    // console.log(userEmail.value);
+    // console.log(userPw.value);
+    // console.log(obj);
+    
+    //     if(userEmail.value != 'undefined' && obj!=null){
+        
+        
+    //             if( userPw.value == obj.pw ){
+    //                 localStorage.setItem('current user', userEmail.value);
+    //                 var newDate = new Date();
+    //                 var datetime = newDate.getDate()+'/'+newDate.getMonth()+'-'+newDate.getHours()+':'+newDate.getMinutes();
+    //                 console.log(datetime);
+    //                 console.log(obj.name);
+    //                 console.log(obj.name.value);
+            
+
+    //                 obj.datetime=datetime;
+    //                 obj.tries_left = 3;
+    //                 console.log(obj.name);
+    //                 console.log(obj.datetime);
+
+    //                 localStorage.setItem(userEmail.value, JSON.stringify(obj));
+    //                 doc=window.open("home_screen.html");
+    //                 doc.write(checkCookie());
+                    
+    //             }
+    //             else{
+    //                 if(obj.tries_left>0)
+    //                 {
+    //                 obj.tries_left = obj.tries_left -1;
+    //                 localStorage.setItem(userEmail.value, JSON.stringify(obj));
+    //                 alert("Login Failed Now Only "+obj.tries_left+" Login Attempts Available");
+    //                 }
+    //                 else
+    //                 {
+    //                 obj.tries_left=0;
+    //                 localStorage.setItem(userEmail.value, JSON.stringify(obj));
+    //                 alert("Your account is blocked for 30 seconds!")
+    //                 setTimeout(check, 10000);
+    //                 obj.tries_left = 3;
+    //                 localStorage.setItem(userEmail.value, JSON.stringify(obj));
+    //                 }
+                    
+    //                 }
+            
+        
+        
+        
+    // }
+        
+    //     else{
+    //         alert('Error on login');
+            
+    //     }
