@@ -13,6 +13,12 @@
                 obj.readyState=4;
                 return obj;
             }
+            if(obj.type=="guest"){
+                add_guest(body)
+                obj.status=200;
+                obj.readyState=4;
+                return obj;
+            }
 
         }
         else{

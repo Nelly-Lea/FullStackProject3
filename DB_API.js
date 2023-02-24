@@ -7,11 +7,10 @@
     type:"guest",
     last_name:'',
     first_name:'',
-    mail:'',
+    mail:'', // id de la personne
     phone_number:'',
     family_member:0,
     coming:false,
-    list_manager:''
 }
 
 //rajouter object user 
@@ -27,9 +26,19 @@ function Guest(last_name, first_name, mail, phone_number, family_number, coming,
     this.list_manager=list_manager;
 }
 
-function add_guest(last_name,first_name,mail, phone_number, family_member, coming){
-    var guest=new Task(last_name, first_name,mail,phone_number, family_member, coming)
-    localStorage.setItem(mail, JSON.stringify (guest))
+function add_guest(guest_json){
+    list_guest_array=[]
+    var new_guest=JSON.parse(guest_json);
+    list_guest=JSON.parse(JSON.stringify(localStorage.getItem(current_user)))
+    if(list_guest!=null){
+        list_guest.push(new_guest);
+        localStorage.removeItem(current_user)
+        localStorage.setItem(current_user.mail,JSON.stringify(list_guest))
+    }else{
+        list_guest_array.push(new_guest);
+        localStorage.setItem(current_user.mail,JSON.stringify(list_guest_array))
+    }
+   
 }
 
 function delete_guest(mail){

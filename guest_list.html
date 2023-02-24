@@ -255,30 +255,30 @@
             <div id="add_guest">
                 <p >Your Guest list:</p>
                 <div >
-                    <form name='form-login'>
+                    <form name='form-login' id="add_guest_form">
                         <div class="sign-in-htm">
 
                             <div class="form_title"><br><br>
-                                <label for="lastName" class="label">Last Name</label><br>
-                                <input type="text" class="input" id="lastName" required><br><br>
+                                <label for="lastName_guest" class="label">Last Name</label><br>
+                                <input type="text" class="input" id="lastName_guest" required><br><br>
                             </div>
                             <div class="form_title">
-                                <label for="firstName" class="label">First Name</label><br>
-                                <input type="text" class="input" id="firstName" required><br><br>
+                                <label for="firstName_guest" class="label">First Name</label><br>
+                                <input type="text" class="input" id="firstName_guest" required><br><br>
                             </div>
         
                             <div class="form_title">
-                                <label for="userEmail" class="label">Email</label><br>
-                                <input type="email" class="input" id="userMail" required><br><br>
+                                <label for="mail_guest" class="label">Email</label><br>
+                                <input type="email" class="input" id="mail_guest" required><br><br>
                             </div>
                             <div class="form_title">
-                                <label for="phoneNumber" class="label">Phone Number</label><br>
-                                <input type="text" id="phoneNumber" name="phone_number" pattern="[0]{1}[0-9]{9}"><br><br>
+                                <label for="phoneNumber_guest" class="label">Phone Number</label><br>
+                                <input type="text" id="phoneNumber_guest" name="phone_number" pattern="[0]{1}[0-9]{9}"><br><br>
                             </div>
                             <div class="form_title">
-                                <label class="label_choice"  for="person_number">How many persons </label>
-                                <select id="list_select" id="person_number">
-                                  <option>1</option>
+                                <label class="label_choice"  for="person_number_guest">How many persons </label>
+                                <select  id="person_number_guest">
+                                  <option selected="selected">1</option>
                                   <option>2</option>
                                   <option>3</option>
                                   <option>4</option>
@@ -293,21 +293,22 @@
                             <div class="form_title">
                                 <p>Do they come ?</p>
                                 <input type="radio" id="yes" name="coming" >
-                                <label for="yes">Yes</label><br>
+                                <label for="yes" checked="checked">Yes</label><br>
                                 <input type="radio" id="no" name="coming">
                                 <label for="no">No</label><br><br>  
                             </div>
                             <div class="form_title">
                             <a  >  <!--A CHANGER AVEC PAGE PRESENTATION JEUX-->
-                                <input id="button_add_guest" class="button" type="button" value="Add Guest" />
+                                <input id="button_add_guest" class="button" type="button" value="Add Guest" onclick="Add_Guest()" />
                               </a>
                             </div>
         
                         
         
                         </div>
-                    <ol id="guest_event_list">
-                    </ol>
+                    </form>
+                    <ul id="guest_event_list">
+                    </ul>
                 </div>
                 
             </div>

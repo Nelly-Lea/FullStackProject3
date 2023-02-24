@@ -283,6 +283,89 @@ form.addEventListener("submit", function (e) {
       }, 5000);
     });
 });
+
+//java de guest list page 
+//faire les verifiaction des field pas vides
+function Add_Guest(){
+    var firstname_guest = document.getElementById('firstName_guest');
+    var lastname_guest = document.getElementById('lastName_guest');
+    var mail_guest = document.getElementById('mail_guest');
+    var phonenumber_guest = document.getElementById('phoneNumber_guest');
+    var person_number_list = document.getElementById('person_number_guest');
+    var person_number_guest=person_number_list.options[person_number_list.selectedIndex].text;
+   var com=document.getElementsByName("coming");
+   var coming_guest;
+   for(i = 0; i < com.length; i++) {
+    if(com[i].checked){
+        if(com[i].id=="yes"){
+            coming_guest=true;
+        }else{
+            coming_guest=false;
+        }
+    }
+}
+    
+    var new_guest ={
+        type:"guest",
+        last_name:lastname_guest.value,
+        first_name:firstname_guest.value,
+        mail:mail_guest.value, // id de la personne
+        phone_number:phonenumber_guest.value,
+        family_member:parseInt(person_number_guest),
+        coming:coming_guest,
+    }
+    var new_guest_json=JSON.stringify(new_guest);
+
+    var fxhttp=new FXMLHttpRequest();
+    fxhttp.open("POST","./DB_API.js",true);
+    fxhttp.send(new_guest_json);
+    var rep=fxhttp.onload();
+
+    var list_guest=document.getElementById("guest_event_list");
+    var li = document.createElement("li");
+    var item_value = lastname_guest.value+" "+firstname_guest.value+": "+person_number_guest;
+    var t = document.createTextNode(item_value);
+    li.appendChild(t);
+    list_guest.appendChild(li);
+  
+  //document.getElementById("myInput").value = "";
+  firstname_guest.value="";
+  lastname_guest.value="";
+  mail_guest.value="";
+  phonenumber_guest.value="";
+  person_number_list.value="1";
+  com[0].checked=true;
+
+   var span = document.createElement("SPAN");
+   var txt = document.createTextNode("\u00D7");
+   span.className = "close";
+   span.appendChild(txt);
+   li.appendChild(span);
+
+   //A arranger rajouter l'event close et event update (a faire rajouter afficher la liste aund la page se charge)
+
+//   for (i = 0; i < close.length; i++) {
+//     close[i].onclick = function() {
+//     //   var div = this.parentElement;
+//     //   div.style.display = "none";
+//     var parent = this.parentElement;
+//     parent.removeChild(this);
+
+//     }
+//   }
+
+
+    
+
+
+
+
+
+
+
+}
+
+
 //////
 
 //ds la fonction check de sign_in

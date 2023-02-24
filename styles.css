@@ -190,4 +190,10 @@
     display: inline-block;
   
   }
+  #add_guest_form{
+    text-align: center;
+    align-items: center;
+    background-color: burlywood;
+
+  }
   
