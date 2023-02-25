@@ -24,6 +24,26 @@
         else{
             if(obj.method=="GET"){
                 var obj=JSON.parse(body)
+            if((obj.type=="user")&&(obj.password=="")){
+                var list_guest=null;
+                list_guest=get_list_guest_of_user(body);
+                if(list_guest!=null){
+                    obj.status=200;
+                    obj.readyState=4;
+                    obj.response=list_guest;
+                    obj.responseText=JSON.stringify(list_guest);
+                    return obj;
+                }else{
+                    obj.status=404;
+                    obj.readyState=4;
+                    obj.response=list_guest;
+                    obj.responseText="";
+                    return obj;
+
+                }
+                
+
+            }
             if(obj.type=="user"){
                 var user=null;
                 user=get_user(body)

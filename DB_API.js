@@ -29,10 +29,10 @@ function Guest(last_name, first_name, mail, phone_number, family_number, coming,
 function add_guest(guest_json){
     list_guest_array=[]
     var new_guest=JSON.parse(guest_json);
-    list_guest=JSON.parse(JSON.stringify(localStorage.getItem(current_user)))
+    list_guest=JSON.parse((localStorage.getItem(current_user.mail)));
     if(list_guest!=null){
         list_guest.push(new_guest);
-        localStorage.removeItem(current_user)
+        localStorage.removeItem(current_user.mail)
         localStorage.setItem(current_user.mail,JSON.stringify(list_guest))
     }else{
         list_guest_array.push(new_guest);
@@ -53,6 +53,8 @@ function update(str,field, mail){
 function get(mail){
     current_guest=JSON.parse(localStorage.getItem( mail));
 }
+
+
 
 var user={
     type:"user",
@@ -106,3 +108,11 @@ function get_user(user_json){
     return null;
     
 }
+
+function get_list_guest_of_user(user_json){
+    var user=JSON.parse(user_json);
+    mail=user.mail;
+    list_guest=JSON.parse(localStorage.getItem(mail))
+    return list_guest;
+}
+
