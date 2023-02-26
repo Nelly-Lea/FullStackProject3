@@ -14,7 +14,7 @@ current_user=null;
 
 
 var button_add_guest=document.getElementById("button_add_guest")
-//button_add_guest.addEventListener("click",add_guest);
+// button_add_guest.addEventListener("click",add_guest);
   var current_page=null;
   var current_page_div=null;
   const app = {
