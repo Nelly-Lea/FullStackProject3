@@ -119,12 +119,15 @@ var button_add_guest=document.getElementById("button_add_guest")
                     span.className = "close";
                     span.appendChild(txt);
                     li.appendChild(span);
+                    
                   
     
                  }
-                 document.querySelectorAll(".nav-link").forEach((item)=>{
-                    item.addEventListener('click', app.nav);
-                 })
+                 var close = document.getElementsByClassName("close");
+                 for (i = 0; i < close.length; i++) {
+                    close[i].onclick = Delete_Guest;
+                    
+                  }
 
             }
            
@@ -367,6 +370,7 @@ function Add_Guest(){
         }
     }
 }
+
     
     var new_guest ={
         type:"guest",
@@ -410,95 +414,22 @@ function Add_Guest(){
    span.appendChild(txt);
    li.appendChild(span);
 
-   //A arranger rajouter l'event close et event update (a faire rajouter afficher la liste aund la page se charge)
+   var close = document.getElementsByClassName("close");
+   for (i = 0; i < close.length; i++) {
+      close[i].onclick = Delete_Guest;
+      
+    }
 
-//   for (i = 0; i < close.length; i++) {
-//     close[i].onclick = function() {
-//     //   var div = this.parentElement;
-//     //   div.style.display = "none";
-//     var parent = this.parentElement;
-//     parent.removeChild(this);
-
-//     }
-//   }
-
-
-    
-
-
-
-
-
-
-
+   
+   
+   
 }
-
-
-//////
-
-//ds la fonction check de sign_in
-  // console.log(userEmail.value)
-    //console.log(userPw.value)
-
-
-    //var storedPw = localStorage.getItem(userName.value);
-    //var storedPw = window.localStorage.getItem(userName.value);
-    //var obj=JSON.parse(window.localStorage.getItem(userEmail.value));
-    //console.log(obj);
-
-    // var userRemember = document.getElementById("rememberMe");
-
-    // console.log(userEmail.value);
-    // console.log(userPw.value);
-    // console.log(obj);
-    
-    //     if(userEmail.value != 'undefined' && obj!=null){
-        
-        
-    //             if( userPw.value == obj.pw ){
-    //                 localStorage.setItem('current user', userEmail.value);
-    //                 var newDate = new Date();
-    //                 var datetime = newDate.getDate()+'/'+newDate.getMonth()+'-'+newDate.getHours()+':'+newDate.getMinutes();
-    //                 console.log(datetime);
-    //                 console.log(obj.name);
-    //                 console.log(obj.name.value);
-            
-
-    //                 obj.datetime=datetime;
-    //                 obj.tries_left = 3;
-    //                 console.log(obj.name);
-    //                 console.log(obj.datetime);
-
-    //                 localStorage.setItem(userEmail.value, JSON.stringify(obj));
-    //                 doc=window.open("home_screen.html");
-    //                 doc.write(checkCookie());
-                    
-    //             }
-    //             else{
-    //                 if(obj.tries_left>0)
-    //                 {
-    //                 obj.tries_left = obj.tries_left -1;
-    //                 localStorage.setItem(userEmail.value, JSON.stringify(obj));
-    //                 alert("Login Failed Now Only "+obj.tries_left+" Login Attempts Available");
-    //                 }
-    //                 else
-    //                 {
-    //                 obj.tries_left=0;
-    //                 localStorage.setItem(userEmail.value, JSON.stringify(obj));
-    //                 alert("Your account is blocked for 30 seconds!")
-    //                 setTimeout(check, 10000);
-    //                 obj.tries_left = 3;
-    //                 localStorage.setItem(userEmail.value, JSON.stringify(obj));
-    //                 }
-                    
-    //                 }
-            
-        
-        
-        
-    // }
-        
-    //     else{
-    //         alert('Error on login');
-            
-    //     }
+function Delete_Guest(){
+    var parent = this.parentElement;
+    var mail = parent.id;
+    var two_mails = mail + " " + current_user.mail
+    var fxhttp=new FXMLHttpRequest();
+    fxhttp.open("DELETE","./DB_API.js",true);
+    fxhttp.send(two_mails);
+    var rep=fxhttp.onload();  
+   }

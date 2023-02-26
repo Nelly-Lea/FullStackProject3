@@ -64,7 +64,16 @@
                 }
                 
             }
+            
 
+            }
+            if (obj.method == "DELETE" ){
+                delete_guest(body);
+                obj.status=200;
+                obj.readyState=4;
+                obj.response=null;
+                obj.responseText="";
+                return obj;
             }
         }
 

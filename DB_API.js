@@ -41,8 +41,15 @@ function add_guest(guest_json){
    
 }
 
-function delete_guest(mail){
-    localStorage.removeItem(mail); // mail cest une string si cest obj rajouter .value
+function delete_guest(two_mails){
+    var mails_array = two_mails.split(" ");
+    var list_guest = JSON.parse(localStorage.getItem(mails_array[1]));
+    var index = list_guest.findIndex((obj)=>obj.mail == mails_array[0]);
+    if (index>-1){
+        list_guest.splice(index,1)
+    }
+    localStorage.removeItem(mails_array[1]); // mail cest une string si cest obj rajouter .value
+    localStorage.setItem(mails_array[1],JSON.stringify(list_guest));
 }
 
 function update(str,field, mail){
