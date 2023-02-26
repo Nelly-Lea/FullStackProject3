@@ -22,7 +22,7 @@
 
         }
         else{
-            if(obj.method=="GET"){
+            if((obj.method=="GET")&&(obj.url=="./GET_user.js")){
                 var obj=JSON.parse(body)
             if((obj.type=="user")&&(obj.password=="")){
                 var list_guest=null;
@@ -65,6 +65,28 @@
                 
             }
             
+            
+
+            }
+            if((obj.method=="GET")&&(obj.url=="./GET_guest.js"))
+            {
+                var guest=null;
+                guest=get_guest(body);
+                if(guest!=null)
+                {
+                    obj.status=200;
+                    obj.readyState=4;
+                    obj.response=guest;
+                    obj.responseText=JSON.stringify(guest);
+                    return obj;
+                }else{
+                    obj.status=404;
+                    obj.readyState=4;
+                    obj.response=guest;
+                    obj.responseText="";
+                    return obj;
+
+                }
 
             }
             if (obj.method == "DELETE" ){

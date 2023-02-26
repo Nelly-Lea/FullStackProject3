@@ -41,7 +41,7 @@ function add_guest(guest_json){
    
 }
 
-function delete_guest(two_mails){
+function delete_guest(two_mails){   //mail_array[0]==mail of guest to delete mail_arrau[1]==mail of current user
     var mails_array = two_mails.split(" ");
     var list_guest = JSON.parse(localStorage.getItem(mails_array[1]));
     var index = list_guest.findIndex((obj)=>obj.mail == mails_array[0]);
@@ -49,7 +49,12 @@ function delete_guest(two_mails){
         list_guest.splice(index,1)
     }
     localStorage.removeItem(mails_array[1]); // mail cest une string si cest obj rajouter .value
-    localStorage.setItem(mails_array[1],JSON.stringify(list_guest));
+    if(list_guest.length!=0){
+     
+      localStorage.setItem(mails_array[1],JSON.stringify(list_guest));
+
+    }
+    
 }
 
 function update(str,field, mail){
@@ -57,8 +62,11 @@ function update(str,field, mail){
     guest_to_update[field]=str; // a verifier
 }
 
-function get(mail){
-    current_guest=JSON.parse(localStorage.getItem( mail));
+function get_guest(two_mails){
+    var mails_array = two_mails.split(" ");
+    var list_guest = JSON.parse(localStorage.getItem(mails_array[1]));
+    current_guest=list_guest.find(guest=>guest.mail==mails_array[0]);
+    return current_guest;
 }
 
 

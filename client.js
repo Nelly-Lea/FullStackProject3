@@ -11,7 +11,8 @@
 //     // document.body.appendChild(clon1);
 //   }
 current_user=null;
-
+var delete_guest_bool=false;
+var current_guest=null;
 
 var button_add_guest=document.getElementById("button_add_guest")
 // button_add_guest.addEventListener("click",add_guest);
@@ -55,6 +56,10 @@ var button_add_guest=document.getElementById("button_add_guest")
         window.addEventListener('popstate', app.poppin);
     },
     nav: function(ev){
+        if(delete_guest_bool){
+            delete_guest_bool=false;
+            return;
+        }
          ev.preventDefault();
          let currentPage= ev.target.getAttribute('data-target');
           temp1=document.querySelector(current_page_div)
@@ -77,7 +82,7 @@ var button_add_guest=document.getElementById("button_add_guest")
 
         if(ev.target.id=="guest_list"){
             var fxhttp=new FXMLHttpRequest();
-            fxhttp.open("GET","./DB_API.js",true);
+            fxhttp.open("GET","./GET_user.js",true);
             user_search_list={
                 type:"user",
                 name:"",
@@ -110,10 +115,10 @@ var button_add_guest=document.getElementById("button_add_guest")
                     li.setAttribute('data-target', "details_guest");
                     li.classList.add("nav-link");
                     li.appendChild(t);
-                    li.onclick=get_current_guest;
+                    li.onclick=get_current_guest_id;
                     document.getElementById("guest_event_list").appendChild(li);
                 
-                  
+                    li.addEventListener('click', app.nav);
                     var span = document.createElement("SPAN");
                     var txt = document.createTextNode("\u00D7");
                     span.className = "close";
@@ -131,7 +136,11 @@ var button_add_guest=document.getElementById("button_add_guest")
 
             }
            
-            }
+        }
+        if(ev.target.id=="details_guest"){
+            get_current_guest();
+            return;
+         }
         // let h1 = ev.target.querySelector('h1');
         // h1.classList.add('big')
         // setTimeout((h)=>{
@@ -160,10 +169,50 @@ var button_add_guest=document.getElementById("button_add_guest")
 }
 
 document.addEventListener('DOMContentLoaded', app.init);
+var current_guest_id=null;
+function get_current_guest_id(){
+  current_guest_id=this.id;
+}
 function get_current_guest() //fonction pour montrer infos sur guest 
 {
-    var x=this.id; // aller chcercher info sur ce guest
-    console.log(x);
+    var mail_current_guest=current_guest_id; // aller chcercher info sur ce guest
+    var two_mails = mail_current_guest + " " + current_user.mail
+    var fxhttp=new FXMLHttpRequest();
+    fxhttp.open("GET","./GET_guest.js",true);
+    fxhttp.send(two_mails);
+    var rep=fxhttp.onload();
+    current_guest=rep;
+
+    var firstname_guest_details = document.getElementById('firstName_guest_details');
+    var lastname_guest_details = document.getElementById('lastName_guest_details');
+    var mail_guest_details = document.getElementById('mail_guest_details');
+    var phonenumber_guest_details = document.getElementById('phoneNumber_guest_details');
+    var person_number_list_details= document.getElementById('person_number_guest_details');
+   // var person_number_guest_details=person_number_list_details.options[person_number_list_details.selectedIndex].text;
+   var com_details=document.getElementsByName("coming_details");
+   //var coming_guest_details;
+//    for(i = 0; i < com_details.length; i++) {
+//     if(com_details[i].checked){
+//         if(com_details[i].id=="yes"){
+//             coming_guest_details=true;
+//         }else{
+//             coming_guest_details=false;
+//         }
+//     }
+// }
+lastname_guest_details.setAttribute("value", current_guest.last_name);
+firstname_guest_details.setAttribute("value",current_guest.first_name);
+mail_guest_details.setAttribute("value", current_guest.mail);
+phonenumber_guest_details.setAttribute("value", current_guest.phone_number);
+var n=parseInt(current_guest.family_member,10)-1;
+person_number_list_details.querySelectorAll('option')[n].selected='selected'; 
+if(current_guest.coming){
+    com_details[0].checked=true;
+}else{
+    com_details[1].checked=true;
+}
+
+    //console.log(x);
 
 }
 // java de sign_up 
@@ -275,7 +324,7 @@ function check(){
 
 
     var fxhttp=new FXMLHttpRequest();
-    fxhttp.open("GET","./DB_API.js",true);
+    fxhttp.open("GET","./GET_user.js",true);
     fxhttp.send(user_to_search_json);
     var rep=fxhttp.onload();
     current_user=rep;
@@ -396,7 +445,7 @@ function Add_Guest(){
     li.setAttribute('data-target', "details_guest");
     li.classList.add("nav-link");
     li.appendChild(t);
-    li.onclick=get_current_guest;
+    li.onclick=get_current_guest_id;
     li.addEventListener('click', app.nav);
     list_guest.appendChild(li);
   
@@ -431,5 +480,9 @@ function Delete_Guest(){
     var fxhttp=new FXMLHttpRequest();
     fxhttp.open("DELETE","./DB_API.js",true);
     fxhttp.send(two_mails);
-    var rep=fxhttp.onload();  
+    var rep=fxhttp.onload(); 
+    var item_delete=document.getElementById(mail);
+    var list_guest=document.getElementById("guest_event_list");
+    list_guest.removeChild(item_delete); 
+    delete_guest_bool=true;
    }

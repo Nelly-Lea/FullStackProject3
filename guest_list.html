@@ -307,6 +307,7 @@
         
                         </div>
                     </form>
+                </div>
                     <ul id="guest_event_list">
                     </ul>
                 </div>
@@ -321,6 +322,61 @@
                 <li><a href="#" data-target="sign_up" class="nav-link">SIGN_UP</a></li>
                 <li><a href="#" data-target="guest_list" class="nav-link">GUEST LIST PAGE</a></li>
             </ol>
+
+            <div >
+                <form name='form-details' id="add_guest_form">
+                    <div class="details-htm">
+
+                        <div class="form_title"><br><br>
+                            <label for="lastName_guest_details" class="label">Last Name</label><br>
+                            <input type="text" class="input" id="lastName_guest_details"  required><br><br>
+                        </div>
+                        <div class="form_title">
+                            <label for="firstName_guest_details" class="label">First Name</label><br>
+                            <input type="text" class="input" id="firstName_guest_details" required><br><br>
+                        </div>
+    
+                        <div class="form_title">
+                            <label for="mail_guest_details" class="label">Email</label><br>
+                            <input type="email" class="input" id="mail_guest_details" required><br><br>
+                        </div>
+                        <div class="form_title">
+                            <label for="phoneNumber_guest_details" class="label">Phone Number</label><br>
+                            <input type="text" id="phoneNumber_guest_details" name="phone_number" pattern="[0]{1}[0-9]{9}"><br><br>
+                        </div>
+                        <div class="form_title">
+                            <label class="label_choice"  for="person_number_guest">How many persons </label>
+                            <select  id="person_number_guest_details">
+                              <option selected="selected">1</option>
+                              <option>2</option>
+                              <option>3</option>
+                              <option>4</option>
+                              <option>5</option>
+                              <option>6</option>
+                              <option>7</option>
+                              <option>8</option>
+                              <option>9</option>
+                              <option>10</option>
+                           </select><br><br>
+                         </div> 
+                        <div class="form_title">
+                            <p>Do they come ?</p>
+                            <input type="radio" id="yes" checked="checked" name="coming_details" >
+                            <label for="yes" >Yes</label><br>
+                            <input type="radio" id="no" name="coming_details">
+                            <label for="no">No</label><br><br>  
+                        </div>
+                        <div class="form_title">
+                        <a  >  <!--A CHANGER AVEC PAGE PRESENTATION JEUX-->
+                            <input id="button_add_guest" class="button" type="button" value="Confirm"  />
+                          </a>
+                        </div>
+    
+                    
+    
+                    </div>
+                </form>
+            </div>
 
         </div>
 
