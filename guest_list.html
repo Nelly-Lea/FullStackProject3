@@ -11,7 +11,7 @@
     <link href='https://fonts.googleapis.com/css?family=Tangerine' rel='stylesheet'>
     <title>guest_list_website</title>
 </head>
-<body>
+<body >
    
    
     <!-- <h1>BONJOUR</h1>
@@ -19,7 +19,7 @@
     <template class="active_page" id="home"  >
         <div id="home_div"  >
         <div >
-            <p id="site_title">Welcome to Guest</p>
+            <p id="site_title">Welcome to EasyPlan</p>
             <div class="navbar">
                 <nav>
                     <ul class="navbarul">
@@ -40,7 +40,7 @@
 
         <div class="slides slowFade">
             <div class="slide">
-                <img src="./images/wedding.jpg" alt="img"/>
+                <img src="./images/wedding_flower.jpg" alt="img"/>
             </div>
             <div class="slide">
                 <img src="./images/brit_mila.jpg" alt="img"/>
@@ -55,7 +55,7 @@
     <template  class="page"  id="contact">
         <div id="contact_div" class="contact">
             <!-- <h1>CONTACT PAGE</h1> -->
-            <div class="navbar">
+            <!-- <div class="navbar">
                 <nav>
                     <ul class="navbarul">
                         <li><a href="#" data-target="home" class="nav-link">  ❃ Home</a></li>
@@ -64,7 +64,7 @@
                         <li><a href="#" data-target="sign_up" class="nav-link">  ❃ Sign Up</a></li>
                     </ul>
                 </nav>
-            </div>
+            </div> -->
             <!-- <ol>
                 <li><a href="#" data-target="home" class="nav-link">HOME</a></li>
                 <li><a href="#" data-target="sign_up" class="nav-link">SIGN_UP</a></li>
@@ -77,35 +77,35 @@
                       <h1 class="my-3 text-3xl font-semibold text-gray-700 dark:text-gray-200">
                         Contact Us
                       </h1>
-                      <p class="text-gray-400 dark:text-gray-400">
+                      <p class="text-gray-400 dark:text-gray-400  title_label">
                         Fill up the form below to send us a message.
                       </p>
                     </div>
                     <div class="m-7">
-                      <form action="https://api.web3forms.com/submit" method="POST" id="form">
+                      <form action="https://api.web3forms.com/submit" method="POST" id="form_contact">
                         <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE" />
                         <input type="hidden" name="subject" value="New Submission from Web3Forms" />
                         <input type="checkbox" name="botcheck" id="" style="display: none;" />
               
                         <div class="mb-6">
-                          <label for="name" class="block mb-2 text-sm text-gray-600 dark:text-gray-400">Full Name</label>
+                          <label for="name" class="block mb-2 text-sm text-gray-600 dark:text-gray-400  title_label">Full Name</label>
                           <input type="text" name="name" id="name" placeholder="John Doe" required class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500" />
                         </div>
                         <div class="mb-6">
-                          <label for="email" class="block mb-2 text-sm text-gray-600 dark:text-gray-400">Email Address</label>
+                          <label for="email" class="block mb-2 text-sm text-gray-600 dark:text-gray-400  title_label">Email Address</label>
                           <input type="email" name="email" id="email" placeholder="you@company.com" required class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500" />
                         </div>
                         <div class="mb-6">
-                          <label for="phone" class="text-sm text-gray-600 dark:text-gray-400">Phone Number</label>
+                          <label for="phone" class="text-sm text-gray-600 dark:text-gray-400  title_label">Phone Number</label>
                           <input type="text" name="phone" id="phone" placeholder="+1 (555) 1234-567" required class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500" />
                         </div>
                         <div class="mb-6">
-                          <label for="message" class="block mb-2 text-sm text-gray-600 dark:text-gray-400">Your Message</label>
+                          <label for="message" class="block mb-2 text-sm text-gray-600 dark:text-gray-400  title_label">Your Message</label>
               
                           <textarea rows="5" name="message" id="message" placeholder="Your Message" class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500" required></textarea>
                         </div>
                         <div class="mb-6">
-                          <button type="submit" class="w-full px-3 py-4 text-white bg-indigo-500 rounded-md focus:bg-indigo-600 focus:outline-none">
+                          <button type="submit" class="w-full px-3 py-4 text-white bg-indigo-500 rounded-md focus:bg-indigo-600 focus:outline-none button">
                             Send Message
                           </button>
                         </div>
@@ -163,11 +163,11 @@
                     <div class="sign-in-htm">
     
                         <div class="group">
-                            <label for="userEmail" class="label">Email</label>
+                            <label for="userEmail" class="label title_label">Email</label>
                             <input type="email" class="input" id="userMail" placeholder="UserMail" required>
                         </div>
                         <div class="group">
-                            <label for="userPw" class="label">Password</label>
+                            <label for="userPw" class="label title_label">Password</label>
                             <input type="password" class="input" id= "userPw" placeholder="Password" required>
                         </div>
                         <div class="group">
@@ -205,37 +205,37 @@
                         
     
                         <div class="group">
-                            <label for="name" class="label">Name</label>
+                            <label for="name" class="label title_label">Name</label>
                             <input type="text" id="name" class="input" placeholder="Username" required>
                         </div>
                         <div class="group">
-                            <label for="email" class="label">Email</label>
+                            <label for="email" class="label title_label">Email</label>
                             <input type="email" class="input" id= "email" placeholder="Email" required>
                          </div>
     
                         <div class="group">
-                            <label for="pw" class="label">Password</label>
+                            <label for="pw" class="label title_label">Password</label>
                             <input type="password" class="input" id= "pw" placeholder="Password" required>
                          </div>
     
                          <div class="group">
-                            <label for="pw" class="label">Repeat Password</label>
+                            <label for="pw" class="label title_label">Repeat Password</label>
                             <input type="password" class="input" id= "repeat_pw" placeholder="Confirm Password" required >
                          </div>
     
                         <ul class="helper-text">
-                            <li class="lowercase">Must contain a lowercase letter.</li>
-                            <li class="uppercase">Must contain an uppercase letter.</li>
-                            <li class="special">Must contain a number or special character.</li>
+                            <li class="lowercase title_label">Must contain a lowercase letter.</li>
+                            <li class="uppercase title_label">Must contain an uppercase letter.</li>
+                            <li class="special title_label">Must contain a number or special character.</li>
                         </ul>
                         <div class="group">
                             <input id="rgstr_btn" data-target="guest_list" class="button nav-link" type="submit" value="Sign Up" onclick="store()">
                         </div>
                         <br>
                         <div class="hr"></div>
-                        <div class="foot-lnk">
+                        <!-- <div class="foot-lnk">
                             <label for="tab-1">Already Member?</a>
-                        </div>
+                        </div> -->
                     </div>
                 </form>
          </div>
@@ -243,18 +243,29 @@
    <template class="page" id="guest_list">
         <div id="guest_list_div">
             <!-- <h1>GUEST LIST PAGE</h1> -->
-            <ol>
+            <!-- <ol>
                 <li><a href="#" data-target="home" class="nav-link">HOME</a></li>
                 <li><a href="#" data-target="sign_up" class="nav-link">SIGN_UP</a></li>
                 <li><a href="#" data-target="guest_list" class="nav-link">GUEST LIST PAGE</a></li>
-            </ol>
+            </ol> -->
+            <p id="guest_list_title">EasyPlan</p>
+            <div class="navbar">
+                <nav>
+                    <ul class="navbarul">
+                        <li><a href="#" data-target="home" class="nav-link"> ❃ Home</a></li>
+                        <li><a href="#" data-target="contact" class="nav-link" > ❃ Contact</a></li>
+                        <li><a href="#" data-target="about_us" class="nav-link"> ❃ About Us</a></li>
+                       
+                    </ul>
+                </nav>
+            </div>
             <div id="username_div">
-                <p id="hello_user">Hello
-                <a href="#"  ><img id="log_out_icone" data-target="home" class="nav-link" src="./images/log_out.png"></a></p>
+                <p id="hello_user"></p>
+                <a href="#"  ><img id="log_out_icone" data-target="home" class="nav-link" src="./images/log_out.png"></a>
             </div><br><br>
             <div id="add_guest">
-                <p >Your Guest list:</p>
-                <div >
+                
+                <div id="add_guest_div" class="remove">
                     <form name='form-login' id="add_guest_form">
                         <div class="sign-in-htm">
 
@@ -273,7 +284,7 @@
                             </div>
                             <div class="form_title">
                                 <label for="phoneNumber_guest" class="label">Phone Number</label><br>
-                                <input type="text" id="phoneNumber_guest" name="phone_number" pattern="[0]{1}[0-9]{9}"><br><br>
+                                <input type="tel" id="phoneNumber_guest" name="phone_number" pattern="[0-9]{3}[0-9]{3}[0-9]{4}" required><br><br>
                             </div>
                             <div class="form_title">
                                 <label class="label_choice"  for="person_number_guest">How many persons </label>
@@ -299,7 +310,7 @@
                             </div>
                             <div class="form_title">
                             <a  >  <!--A CHANGER AVEC PAGE PRESENTATION JEUX-->
-                                <input id="button_add_guest" class="button" type="button" value="Add Guest" onclick="Add_Guest()" />
+                                <input id="button_add_guest" class="button" type="submit" value="Add Guest" onclick="Add_Guest()" />
                               </a>
                             </div>
         
@@ -308,7 +319,10 @@
                         </div>
                     </form>
                 </div>
+                <div>
+                    <div id="list_guest_title">Your Guest list:<span id="add_guest_span" onclick="Display_Add_Guest()">+</span></div>
                     <ul id="guest_event_list">
+                    
                     </ul>
                 </div>
                 
@@ -342,7 +356,7 @@
                         </div>
                         <div class="form_title">
                             <label for="phoneNumber_guest_details" class="label">Phone Number</label><br>
-                            <input type="text" id="phoneNumber_guest_details" name="phone_number" pattern="[0]{1}[0-9]{9}"><br><br>
+                            <input type="tel" id="phoneNumber_guest_details" name="phone_number" pattern="[0-9]{3}[0-9]{3}[0-9]{4}" required><br><br>
                         </div>
                         <div class="form_title">
                             <label class="label_choice"  for="person_number_guest">How many persons </label>
@@ -368,7 +382,7 @@
                         </div>
                         <div class="form_title">
                         <a  >  
-                            <input id="button_update_guest" class="button" type="button" value="Confirm" onclick="Update_Guest()" />
+                            <input id="button_update_guest" data-target="guest_list"  class="nav-link button" type="submit" value="Confirm" onclick="Update_Guest()"  />
                           </a>
                         </div>
     

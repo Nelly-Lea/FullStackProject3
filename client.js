@@ -10,9 +10,12 @@
 //     // var clon1 = temp1.content.cloneNode(true);
 //     // document.body.appendChild(clon1);
 //   }
-current_user=null;
+var current_user;
 var delete_guest_bool=false;
 var current_guest=null;
+
+
+
 
 var button_add_guest=document.getElementById("button_add_guest")
 // button_add_guest.addEventListener("click",add_guest);
@@ -81,6 +84,8 @@ var button_add_guest=document.getElementById("button_add_guest")
         console.log('Page', ev.target.id, 'just shown');
 
         if(ev.target.id=="guest_list"){
+            var p_hello=document.getElementById("hello_user");
+            p_hello.innerHTML="Hello "+current_user.name;
             var fxhttp=new FXMLHttpRequest();
             fxhttp.open("GET","./GET_user.js",true);
             user_search_list={
@@ -112,6 +117,7 @@ var button_add_guest=document.getElementById("button_add_guest")
                     // li.appendChild(a);
                     var t = document.createTextNode(item_value);
                     li.setAttribute('id',list_guest[i].mail)
+                    li.setAttribute('class',"list_guest")
                     li.setAttribute('data-target', "details_guest");
                     li.classList.add("nav-link");
                     li.appendChild(t);
@@ -120,7 +126,7 @@ var button_add_guest=document.getElementById("button_add_guest")
                 
                     li.addEventListener('click', app.nav);
                     var span = document.createElement("SPAN");
-                    var txt = document.createTextNode("\u00D7");
+                    var txt = document.createTextNode("🗑");
                     span.className = "close";
                     span.appendChild(txt);
                     li.appendChild(span);
@@ -328,8 +334,11 @@ function check(){
     fxhttp.send(user_to_search_json);
     var rep=fxhttp.onload();
     current_user=rep;
+
     if(rep!=null){
         // aller page guest
+       
+
         let currentPage= "guest_list";
           temp1=document.querySelector(current_page_div)
           document.body.removeChild(temp1);
@@ -347,58 +356,63 @@ function check(){
     }
     else{
         //rester meme page
+        alert("error in username or password, please retry")
     }
     
  
 
 }
-// java de contact us
-// const form = document.getElementById("form");
-// const result = document.getElementById("result");
+// java de contact us  // je sais pas si on garde
 
-// form.addEventListener("submit", function (e) {
-//   const formData = new FormData(form);
-//   e.preventDefault();
-//   var object = {};
-//   formData.forEach((value, key) => {
-//     object[key] = value;
-//   });
-//   var json = JSON.stringify(object);
-//   result.innerHTML = "Please wait...";
+function contact_func(){
 
-//   fetch("https://api.web3forms.com/submit", {
-//     method: "POST",
-//     headers: {
-//       "Content-Type": "application/json",
-//       Accept: "application/json"
-//     },
-//     body: json
-//   })
-//     .then(async (response) => {
-//       let json = await response.json();
-//       if (response.status == 200) {
-//         result.innerHTML = json.message;
-//         result.classList.remove("text-gray-500");
-//         result.classList.add("text-green-500");
-//       } else {
-//         console.log(response);
-//         result.innerHTML = json.message;
-//         result.classList.remove("text-gray-500");
-//         result.classList.add("text-red-500");
-//       }
-//     })
-//     .catch((error) => {
-//       console.log(error);
-//       result.innerHTML = "Something went wrong!";
-//     })
-//     .then(function () {
-//       form.reset();
-//       setTimeout(() => {
-//         result.style.display = "none";
-//       }, 5000);
-//     });
-// });
 
+const form = document.getElementById("form_contact");
+const result = document.getElementById("result");
+
+form.addEventListener("submit", function (e) {
+  const formData = new FormData(form);
+  e.preventDefault();
+  var object = {};
+  formData.forEach((value, key) => {
+    object[key] = value;
+  });
+  var json = JSON.stringify(object);
+  result.innerHTML = "Please wait...";
+
+  fetch("https://api.web3forms.com/submit", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json"
+    },
+    body: json
+  })
+    .then(async (response) => {
+      let json = await response.json();
+      if (response.status == 200) {
+        result.innerHTML = json.message;
+        result.classList.remove("text-gray-500");
+        result.classList.add("text-green-500");
+      } else {
+        console.log(response);
+        result.innerHTML = json.message;
+        result.classList.remove("text-gray-500");
+        result.classList.add("text-red-500");
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+      result.innerHTML = "Something went wrong!";
+    })
+    .then(function () {
+      form.reset();
+      setTimeout(() => {
+        result.style.display = "none";
+      }, 5000);
+    });
+});
+}
 //java de guest list page 
 //faire les verifiaction des field pas vides
 function Add_Guest(){
@@ -443,6 +457,7 @@ function Add_Guest(){
     var t = document.createTextNode(item_value);
     li.setAttribute("id",mail_guest.value);
     li.setAttribute('data-target', "details_guest");
+    li.setAttribute('class',"list_guest")
     li.classList.add("nav-link");
     li.appendChild(t);
     li.onclick=get_current_guest_id;
@@ -457,8 +472,12 @@ function Add_Guest(){
   person_number_list.value="1";
   com[0].checked=true;
 
+  var add_guest_form=document.getElementById("add_guest_div");
+  add_guest_form.classList.remove("appear");
+  add_guest_form.classList.add("remove");
+
    var span = document.createElement("SPAN");
-   var txt = document.createTextNode("\u00D7");
+   var txt = document.createTextNode("🗑");
    span.className = "close";
    span.appendChild(txt);
    li.appendChild(span);
@@ -505,6 +524,15 @@ function Update_Guest(){
         }
     }
 }
+var pattern="[0-9]{3}[0-9]{3}[0-9]{4}";
+if(!phonenumber_guest_details.value.match(pattern))
+{
+   alert('error in phone number field');
+//    var button_update=document.getElementById("button_update_guest");
+//    button_update.setAttribute("data-target","details_guest");
+//    var h=location.hash
+   return;
+}
 
 var update_guest={
  type:"guest",
@@ -525,4 +553,11 @@ var rep=fxhttp.onload();
 alert("Your details had been successfully updated!")
 
 
+
+}
+
+function Display_Add_Guest(){
+    var add_guest_form=document.getElementById("add_guest_div");
+    add_guest_form.classList.remove("remove");
+    add_guest_form.classList.add("appear");
 }
