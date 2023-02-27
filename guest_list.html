@@ -329,16 +329,16 @@
 
                         <div class="form_title"><br><br>
                             <label for="lastName_guest_details" class="label">Last Name</label><br>
-                            <input type="text" class="input" id="lastName_guest_details"  required><br><br>
+                            <input type="text" class="input" id="lastName_guest_details"  disabled><br><br>
                         </div>
                         <div class="form_title">
                             <label for="firstName_guest_details" class="label">First Name</label><br>
-                            <input type="text" class="input" id="firstName_guest_details" required><br><br>
+                            <input type="text" class="input" id="firstName_guest_details" disabled><br><br>
                         </div>
     
                         <div class="form_title">
                             <label for="mail_guest_details" class="label">Email</label><br>
-                            <input type="email" class="input" id="mail_guest_details" required><br><br>
+                            <input type="email" class="input" id="mail_guest_details" disabled><br><br>
                         </div>
                         <div class="form_title">
                             <label for="phoneNumber_guest_details" class="label">Phone Number</label><br>
@@ -367,8 +367,8 @@
                             <label for="no">No</label><br><br>  
                         </div>
                         <div class="form_title">
-                        <a  >  <!--A CHANGER AVEC PAGE PRESENTATION JEUX-->
-                            <input id="button_add_guest" class="button" type="button" value="Confirm"  />
+                        <a  >  
+                            <input id="button_add_guest" class="button" type="button" value="Confirm" onclick="Update_Guest()" />
                           </a>
                         </div>
     

@@ -97,6 +97,14 @@
                 obj.responseText="";
                 return obj;
             }
+            if(obj.method=="PUT"){
+                update_guest(body);
+                obj.status=200;
+                obj.readyState=4;
+                obj.response=null;
+                obj.responseText="";
+                return obj;
+            }
         }
 
     }

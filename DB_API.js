@@ -15,7 +15,7 @@
 
 //rajouter object user 
 var current_guest=null;
-
+var current_user=null;
 function Guest(last_name, first_name, mail, phone_number, family_number, coming, list_manager){
     this.last_name=last_name;
     this.first_name=first_name;
@@ -57,9 +57,22 @@ function delete_guest(two_mails){   //mail_array[0]==mail of guest to delete mai
     
 }
 
-function update(str,field, mail){
-    var guest_to_update=JSON.parse(localStorage.getItem( mail));
-    guest_to_update[field]=str; // a verifier
+function update_guest(guest_to_update_json){
+    var guest_to_update_obj=JSON.parse(guest_to_update_json);
+    var list_guest_current_user=[];
+    current_user=JSON.parse(localStorage.getItem("current_user"));
+    list_guest_current_user=JSON.parse(localStorage.getItem(current_user.mail));
+    //var guest_to_remove=list_guest_current_user.find(guest=>guest.mail==guest_to_update_obj.mail);
+    var index = list_guest_current_user.findIndex((obj)=>obj.mail ==guest_to_update_obj.mail);
+    if (index>-1){
+        list_guest_current_user.splice(index,1)
+    }
+   // list_guest_current_user.pop(guest_to_remove);
+    list_guest_current_user.push(guest_to_update_obj);
+
+    localStorage.removeItem(current_user.mail);
+    localStorage.setItem(current_user.mail, JSON.stringify(list_guest_current_user));
+   
 }
 
 function get_guest(two_mails){

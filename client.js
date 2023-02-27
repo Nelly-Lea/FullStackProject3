@@ -353,51 +353,51 @@ function check(){
 
 }
 // java de contact us
-const form = document.getElementById("form");
-const result = document.getElementById("result");
+// const form = document.getElementById("form");
+// const result = document.getElementById("result");
 
-form.addEventListener("submit", function (e) {
-  const formData = new FormData(form);
-  e.preventDefault();
-  var object = {};
-  formData.forEach((value, key) => {
-    object[key] = value;
-  });
-  var json = JSON.stringify(object);
-  result.innerHTML = "Please wait...";
+// form.addEventListener("submit", function (e) {
+//   const formData = new FormData(form);
+//   e.preventDefault();
+//   var object = {};
+//   formData.forEach((value, key) => {
+//     object[key] = value;
+//   });
+//   var json = JSON.stringify(object);
+//   result.innerHTML = "Please wait...";
 
-  fetch("https://api.web3forms.com/submit", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json"
-    },
-    body: json
-  })
-    .then(async (response) => {
-      let json = await response.json();
-      if (response.status == 200) {
-        result.innerHTML = json.message;
-        result.classList.remove("text-gray-500");
-        result.classList.add("text-green-500");
-      } else {
-        console.log(response);
-        result.innerHTML = json.message;
-        result.classList.remove("text-gray-500");
-        result.classList.add("text-red-500");
-      }
-    })
-    .catch((error) => {
-      console.log(error);
-      result.innerHTML = "Something went wrong!";
-    })
-    .then(function () {
-      form.reset();
-      setTimeout(() => {
-        result.style.display = "none";
-      }, 5000);
-    });
-});
+//   fetch("https://api.web3forms.com/submit", {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json",
+//       Accept: "application/json"
+//     },
+//     body: json
+//   })
+//     .then(async (response) => {
+//       let json = await response.json();
+//       if (response.status == 200) {
+//         result.innerHTML = json.message;
+//         result.classList.remove("text-gray-500");
+//         result.classList.add("text-green-500");
+//       } else {
+//         console.log(response);
+//         result.innerHTML = json.message;
+//         result.classList.remove("text-gray-500");
+//         result.classList.add("text-red-500");
+//       }
+//     })
+//     .catch((error) => {
+//       console.log(error);
+//       result.innerHTML = "Something went wrong!";
+//     })
+//     .then(function () {
+//       form.reset();
+//       setTimeout(() => {
+//         result.style.display = "none";
+//       }, 5000);
+//     });
+// });
 
 //java de guest list page 
 //faire les verifiaction des field pas vides
@@ -486,3 +486,42 @@ function Delete_Guest(){
     list_guest.removeChild(item_delete); 
     delete_guest_bool=true;
    }
+
+function Update_Guest(){
+    var firstname_guest_details = document.getElementById('firstName_guest_details');
+    var lastname_guest_details = document.getElementById('lastName_guest_details');
+    var mail_guest_details = document.getElementById('mail_guest_details');
+    var phonenumber_guest_details = document.getElementById('phoneNumber_guest_details');
+    var person_number_list_details= document.getElementById('person_number_guest_details');
+    var person_number_guest_details=person_number_list_details.options[person_number_list_details.selectedIndex].text;
+   var com_details=document.getElementsByName("coming_details");
+   var coming_guest_details;
+   for(i = 0; i < com_details.length; i++) {
+    if(com_details[i].checked){
+        if(com_details[i].id=="yes"){
+            coming_guest_details=true;
+        }else{
+            coming_guest_details=false;
+        }
+    }
+}
+
+var update_guest={
+ type:"guest",
+ first_name:firstname_guest_details.value,
+ last_name:lastname_guest_details.value,
+ mail:mail_guest_details.value,
+ family_member:person_number_guest_details,
+ phone_number:phonenumber_guest_details.value,
+ coming:coming_guest_details
+}
+
+var update_guest_json=JSON.stringify(update_guest);
+
+var fxhttp=new FXMLHttpRequest();
+fxhttp.open("PUT","./DB_API_Update_Guest.js",true);
+fxhttp.send(update_guest_json);
+var rep=fxhttp.onload();
+
+
+}
