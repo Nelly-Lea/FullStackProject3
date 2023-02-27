@@ -522,6 +522,7 @@ var fxhttp=new FXMLHttpRequest();
 fxhttp.open("PUT","./DB_API_Update_Guest.js",true);
 fxhttp.send(update_guest_json);
 var rep=fxhttp.onload();
+alert("Your details had been successfully updated!")
 
 
 }
