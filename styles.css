@@ -12,10 +12,10 @@
 
 /* style home page*/
 body{
-    background-color: rgb(244,207,223);
+    background-color: rgb(247, 241, 230);
 }
 #home_div{
-    background-color: rgb(244,207,223);
+    background-color: rgb(247, 241, 230);
 }
 
 #site_title{
@@ -27,7 +27,7 @@ body{
     align-items: center;
     margin-top: 5px;
     font-weight: bold;
-    color: rgb(133,88,111);
+    color: rgb(92,86,75);
 }
 .navbar { 
     overflow: hidden; 
@@ -47,7 +47,7 @@ body{
     float: left; 
     font-size: 40px; 
     font-weight: bold;
-    color: rgb(133,88,111); 
+    color: rgb(92,86,75); 
     text-align: center; 
     padding: auto; 
     text-decoration: none; 
@@ -128,7 +128,7 @@ body{
   .sign_in{
     height: 100vh;
     width: 100%;
-    background: url("./images/wedding_flower.jpg") no-repeat center center;
+    background: url("./images/wedding.jpg") no-repeat center center;
     background-size: cover;
     display: flex;
     flex-direction: column;
@@ -167,7 +167,7 @@ body{
   .sign_up{
     height: 100vh;
     width: 100%;
-    background: url("./images/wedding_flower.jpg") no-repeat center center;
+    background: url("./images/sign_up.jpg") no-repeat center center;
     background-size: cover;
     display: flex;
     flex-direction: column;
@@ -182,7 +182,7 @@ body{
   .contact{
     height: 100vh;
     width: 100%;
-    background: url("./images/wedding_flower.jpg") no-repeat center center;
+    background: url("./images/contact.jpg") no-repeat center center;
     background-size: cover;
     display: flex;
     flex-direction: column;
@@ -216,12 +216,30 @@ body{
     display: inline;
     
   }
+  #total-guests{
+    border-color:black ;
+    border-style: solid;
+    font-family: 'Pacifico';
+    font-size: 25px;
+    width: 180px;
+    margin-left: 33px;
+    
+
+  }
+  #close_span{
+    float: right;
+    margin-right: 10px;
+    margin-top: 10px;
+    width: 25px;
+    height: 25px;
+  }
   #add_guest_form{
     text-align: center;
     align-items: center;
-    background-color: rgb(133,88,111);
+    background-color: rgb(194, 182, 159);
     font-family: 'Pacifico';
-   color: rgb(237, 205, 223);
+   color: rgb(92,86,75);
+   border-radius: 25px;
 
   }
 
@@ -342,3 +360,14 @@ body{
   text-align: center;
 }
   
+/* style of details_guest*/
+#update_guest_form{
+    text-align: center;
+    align-items: center;
+    background-color: rgb(194, 182, 159);
+    font-family: 'Pacifico';
+   color: rgb(92,86,75);
+   border-radius: 25px;
+   font-size: 20px;
+
+  }

@@ -1,24 +1,13 @@
-//import {FXMLHttpRequest} from './FXMLHttpRequest.js';
 
-//const FXMLHttpRequest = require('./FXMLHttpRequest.js');
-
-// function showContent() {
-//     var temp = document.getElementsByTagName("template")[0];
-//     var clon = temp.content.cloneNode(true);
-//     document.body.appendChild(clon);
-//     // var temp1=document.getElementsByTagName("template")[1];
-//     // var clon1 = temp1.content.cloneNode(true);
-//     // document.body.appendChild(clon1);
-//   }
 var current_user;
 var delete_guest_bool=false;
 var current_guest=null;
-
-
+var error_sign_in=false;
+var max_essai_sign_in=0;
 
 
 var button_add_guest=document.getElementById("button_add_guest")
-// button_add_guest.addEventListener("click",add_guest);
+
   var current_page=null;
   var current_page_div=null;
   const app = {
@@ -40,20 +29,6 @@ var button_add_guest=document.getElementById("button_add_guest")
  
         current_page="#home"
         current_page_div="#home_div"
-        // temps=document.querySelectorAll('template');
-        // t=temps[0].content.querySelector('#nav_sign')
-        // temps[0].content.querySelector('#nav_sign').addEventListener('click', app.nav);
-        // document.querySelectorAll('template').forEach((temp)=>{
-        //     temp_array=temp.content.querySelectorAll('.nav-link');
-           
-
-        //     temp.content.querySelectorAll('.nav-link').forEach((item)=>{
-        //          item.addEventListener('click', app.nav );
-        //          console.log(item.Event)
-        //          item.onClick=app.nav;
-        //          item2=item;
-        //     })
-        // })
       
         history.replaceState({}, 'Home', '#home');
         window.addEventListener('popstate', app.poppin);
@@ -84,89 +59,49 @@ var button_add_guest=document.getElementById("button_add_guest")
         console.log('Page', ev.target.id, 'just shown');
 
         if(ev.target.id=="guest_list"){
-            var p_hello=document.getElementById("hello_user");
-            p_hello.innerHTML="Hello "+current_user.name;
-            var fxhttp=new FXMLHttpRequest();
-            fxhttp.open("GET","./GET_user.js",true);
-            user_search_list={
-                type:"user",
-                name:"",
-                mail:current_user.mail,
-                password:""
-            }
-            var list_to_search_json=JSON.stringify(user_search_list);
 
-            
-            fxhttp.send(list_to_search_json);
-            var list_guest=fxhttp.onload();
-          
-            if(list_guest!=null){
-                for(i=0;i<list_guest.length;i++){
-                    var li = document.createElement("li");
-                   // var a=document.createElement("a");
-                    var item_value = list_guest[i].last_name+" "+list_guest[i].first_name+": "+list_guest[i].family_member;
-                    
-                    // var t = document.createTextNode(item_value);
-                    // a.appendChild(t);
-                    // a.title=item_value;
-                    // a.href="#";
-                    // a.setAttribute('data-target', "details_guest");
-                    // a.classList.add("nav-link");
-                    // a.setAttribute('id',list_guest[i].mail)
-                    // a.setAttribute('onclick',get_current_guest())
-                    // li.appendChild(a);
-                    var t = document.createTextNode(item_value);
-                    li.setAttribute('id',list_guest[i].mail)
-                    li.setAttribute('class',"list_guest")
-                    li.setAttribute('data-target', "details_guest");
-                    li.classList.add("nav-link");
-                    li.appendChild(t);
-                    li.onclick=get_current_guest_id;
-                    document.getElementById("guest_event_list").appendChild(li);
-                
-                    li.addEventListener('click', app.nav);
-                    var span = document.createElement("SPAN");
-                    var txt = document.createTextNode("🗑");
-                    span.className = "close";
-                    span.appendChild(txt);
-                    li.appendChild(span);
-                    
-                  
-    
-                 }
-                 var close = document.getElementsByClassName("close");
-                 for (i = 0; i < close.length; i++) {
-                    close[i].onclick = Delete_Guest;
-                    
-                  }
-
-            }
+            Display_Guest_List_Page();
            
         }
         if(ev.target.id=="details_guest"){
             get_current_guest();
             return;
          }
-        // let h1 = ev.target.querySelector('h1');
-        // h1.classList.add('big')
-        // setTimeout((h)=>{
-        //     h.classList.remove('big');
-        // }, 1200, h1);
+     
     },
     poppin: function(ev){
+        if(current_page=="#sign_in"){
+            if(error_sign_in==true){
+                error_sign_in=false;
+                var userEmail = document.getElementById('userMail');
+                var userPw = document.getElementById('userPw');
+                userEmail.value="";
+                userPw.value="";
+                max_essai_sign_in++;
+                if(max_essai_sign_in==3){
+                    
+                    setTimeout(blocking,  15000);
+                    alert("you are blocked for 15 seconds");
+                    document.getElementById("userMail").disabled = true;
+                    document.getElementById("userPw").disabled = true;
+                    max_essai_sign_in=0;
+                    
+            
+                }
+                return;
+            }
+        }
         console.log(location.hash, 'popstate event');
         let hash = location.hash.replace('#' ,'');
         temp1=document.querySelector(current_page_div)
         document.body.removeChild(temp1);
-        //document.querySelector('.active').classList.remove('active');
         current_page=hash;
         current_page_div="#"+current_page+"_div"
         temp2=document.getElementById(current_page)
         var clon2 = temp2.content.cloneNode(true);
          document.body.appendChild(clon2);
-        //document.getElementById(hash).classList.add('active');
         console.log(hash)
-        //history.pushState({}, currentPage, `#${currentPage}`);
+      
         document.querySelectorAll(".nav-link").forEach((item)=>{
             item.addEventListener('click', app.nav);
          })
@@ -176,15 +111,15 @@ var button_add_guest=document.getElementById("button_add_guest")
 
 document.addEventListener('DOMContentLoaded', app.init);
 var current_guest_id=null;
-function get_current_guest_id(){
+function get_current_guest_id(){ // function to find id of current
   current_guest_id=this.id;
 }
-function get_current_guest() //fonction pour montrer infos sur guest 
+function get_current_guest() //function to show informations about current guest 
 {
-    var mail_current_guest=current_guest_id; // aller chcercher info sur ce guest
+    var mail_current_guest=current_guest_id; //  we want to search info about current user thank his id=> his mail
     var two_mails = mail_current_guest + " " + current_user.mail
     var fxhttp=new FXMLHttpRequest();
-    fxhttp.open("GET","./GET_guest.js",true);
+    fxhttp.open("GET","./GET_guest",true);
     fxhttp.send(two_mails);
     var rep=fxhttp.onload();
     current_guest=rep;
@@ -194,18 +129,9 @@ function get_current_guest() //fonction pour montrer infos sur guest
     var mail_guest_details = document.getElementById('mail_guest_details');
     var phonenumber_guest_details = document.getElementById('phoneNumber_guest_details');
     var person_number_list_details= document.getElementById('person_number_guest_details');
-   // var person_number_guest_details=person_number_list_details.options[person_number_list_details.selectedIndex].text;
+ 
    var com_details=document.getElementsByName("coming_details");
-   //var coming_guest_details;
-//    for(i = 0; i < com_details.length; i++) {
-//     if(com_details[i].checked){
-//         if(com_details[i].id=="yes"){
-//             coming_guest_details=true;
-//         }else{
-//             coming_guest_details=false;
-//         }
-//     }
-// }
+
 lastname_guest_details.setAttribute("value", current_guest.last_name);
 firstname_guest_details.setAttribute("value",current_guest.first_name);
 mail_guest_details.setAttribute("value", current_guest.mail);
@@ -218,11 +144,11 @@ if(current_guest.coming){
     com_details[1].checked=true;
 }
 
-    //console.log(x);
+   
 
 }
 // java de sign_up 
-function store(){
+function store(){ // sign up function
 
     var name = document.getElementById('name');
     var email=document.getElementById('email');
@@ -231,27 +157,7 @@ function store(){
     var lowerCaseLetters = /[a-z]/g;
     var upperCaseLetters = /[A-Z]/g;
     var numbers = /[0-9]/g;
-   
-    // for(let key in localStorage){
-    //     if(key.includes('@')){
-    //         let user=JSON.parse(window.localStorage.getItem(key)).name;
-    //         console.log(user);
-    //         if(user==name.value){
-    //             alert('This name is already in use');
-    //             return false;
-    //         }
-    //     }
-    // }
 
-    // for(let key in localStorage){
-    //     if(key.includes('@')){
-    //         console.log(key);
-    //         if(key==email.value){
-    //             alert('This email is already registered');
-    //             return false;
-    //         }
-    //     }
-    // }
 
     if(name.value.length == 0){
         alert('Please fill in name');
@@ -274,24 +180,7 @@ function store(){
     }else if(pw.value!=repeatpw.value){
         alert('passwords do not match');
     }else{
-        // var newDate = new Date();
-        // var datetime =newDate.getDate()+'/'+newDate.getMonth()+'-'+newDate.getHours()+':'+newDate.getMinutes();
-        // console.log(datetime);
-        // var User = {
-        //     name:name.value,
-        //     pw: pw.value,
-        //     datetime: datetime,
-        //     score_2048:0,
-        //     score_Platformer:0,
-        //     number_of_times_played_Platformer:0,
-        //     number_of_times_played_2048:0,
-        //     tries_left:3
-
-        // };
-
-        // localStorage.setItem(email.value, JSON.stringify(User));
-        
-        //localStorage.setItem(name.value, pw.value);
+       
 
         var new_user ={
             type:"user",
@@ -302,7 +191,7 @@ function store(){
         var new_user_json=JSON.stringify(new_user);
 
         var fxhttp=new FXMLHttpRequest();
-        fxhttp.open("POST","./DB_API.js",true);
+        fxhttp.open("POST","./Add_new_user",true);  
         fxhttp.send(new_user_json);
         
 
@@ -311,11 +200,9 @@ function store(){
     }
 }
 
-//checking
-function check(){
-    //var storedName = localStorage.getItem('name');
-    //var storedPw = localStorage.getItem('pw');
 
+function check(){ //sign in function
+    
     var userEmail = document.getElementById('userMail');
     var userPw = document.getElementById('userPw');
     
@@ -330,15 +217,13 @@ function check(){
 
 
     var fxhttp=new FXMLHttpRequest();
-    fxhttp.open("GET","./GET_user.js",true);
+    fxhttp.open("GET","./GET_user",true);
     fxhttp.send(user_to_search_json);
     var rep=fxhttp.onload();
     current_user=rep;
 
     if(rep!=null){
-        // aller page guest
-       
-
+       // go to guest list page
         let currentPage= "guest_list";
           temp1=document.querySelector(current_page_div)
           document.body.removeChild(temp1);
@@ -355,8 +240,35 @@ function check(){
          document.getElementById(currentPage).dispatchEvent(app.show);
     }
     else{
-        //rester meme page
         alert("error in username or password, please retry")
+        error_sign_in=true;
+        let currentPage= "sign_in";
+        temp1=document.querySelector(current_page_div)
+        document.body.removeChild(temp1);
+        current_page='#'+currentPage;
+        current_page_div=current_page+"_div"
+       temp2=document.getElementById(currentPage)
+       var clon2 = temp2.content.cloneNode(true);
+       document.body.appendChild(clon2);
+       if(error_sign_in==true){
+        error_sign_in=false;
+        var userEmail = document.getElementById('userMail');
+        var userPw = document.getElementById('userPw');
+        userEmail.value="";
+        userPw.value="";
+        max_essai_sign_in++;
+        if(max_essai_sign_in==3){
+            
+            setTimeout(blocking,  15000);
+            alert("you are blocked for 15 seconds");
+            document.getElementById("userMail").disabled = true;
+            document.getElementById("userPw").disabled = true;
+            max_essai_sign_in=0;
+            
+    
+        }
+    }
+       
     }
     
  
@@ -415,7 +327,7 @@ form.addEventListener("submit", function (e) {
 }
 //java de guest list page 
 //faire les verifiaction des field pas vides
-function Add_Guest(){
+function Add_Guest(){ //add new guest
     var firstname_guest = document.getElementById('firstName_guest');
     var lastname_guest = document.getElementById('lastName_guest');
     var mail_guest = document.getElementById('mail_guest');
@@ -433,13 +345,43 @@ function Add_Guest(){
         }
     }
 }
+var pattern="[0-9]{3}[0-9]{3}[0-9]{4}";
+
+
+   
+
+
+if(firstname_guest.value.length == 0){
+    alert('Please fill in first name');
+    
+    //return;
+
+}else if(lastname_guest.value.length== 0){
+    alert('Please fill in last name');
+   
+   // return;
+
+}else if(firstname_guest.value.length == 0 && lastname_guest.value.length == 0){
+    alert('Please fill in first name and last name');
+    //return;
+
+}else if(mail_guest.value.length==0){
+    alert('please fill in mail');
+    //return;
+
+}else if(!phonenumber_guest.value.match(pattern)){
+    alert('error in phone number field');
+    //return;
+
+
+}else{
 
     
     var new_guest ={
         type:"guest",
         last_name:lastname_guest.value,
         first_name:firstname_guest.value,
-        mail:mail_guest.value, // id de la personne
+        mail:mail_guest.value, // =>id of guest
         phone_number:phonenumber_guest.value,
         family_member:parseInt(person_number_guest),
         coming:coming_guest,
@@ -447,7 +389,7 @@ function Add_Guest(){
     var new_guest_json=JSON.stringify(new_guest);
 
     var fxhttp=new FXMLHttpRequest();
-    fxhttp.open("POST","./DB_API.js",true);
+    fxhttp.open("POST","./Add_new_guest",true);
     fxhttp.send(new_guest_json);
     var rep=fxhttp.onload();
 
@@ -464,7 +406,6 @@ function Add_Guest(){
     li.addEventListener('click', app.nav);
     list_guest.appendChild(li);
   
-  //document.getElementById("myInput").value = "";
   firstname_guest.value="";
   lastname_guest.value="";
   mail_guest.value="";
@@ -472,9 +413,8 @@ function Add_Guest(){
   person_number_list.value="1";
   com[0].checked=true;
 
-  var add_guest_form=document.getElementById("add_guest_div");
-  add_guest_form.classList.remove("appear");
-  add_guest_form.classList.add("remove");
+
+   Disappear_Add_Guest();
 
    var span = document.createElement("SPAN");
    var txt = document.createTextNode("🗑");
@@ -487,9 +427,8 @@ function Add_Guest(){
       close[i].onclick = Delete_Guest;
       
     }
-
-    var totalGuests = list_guest.length;
-    totalGuestsElement.textContent = "Total guests: " + totalGuests; 
+    Print_Sum_Guest(); 
+}
    
 }
 function Delete_Guest(){
@@ -504,6 +443,7 @@ function Delete_Guest(){
     var list_guest=document.getElementById("guest_event_list");
     list_guest.removeChild(item_delete); 
     delete_guest_bool=true;
+    Print_Sum_Guest();
    }
 
 function Update_Guest(){
@@ -528,9 +468,7 @@ var pattern="[0-9]{3}[0-9]{3}[0-9]{4}";
 if(!phonenumber_guest_details.value.match(pattern))
 {
    alert('error in phone number field');
-//    var button_update=document.getElementById("button_update_guest");
-//    button_update.setAttribute("data-target","details_guest");
-//    var h=location.hash
+
    return;
 }
 
@@ -547,7 +485,7 @@ var update_guest={
 var update_guest_json=JSON.stringify(update_guest);
 
 var fxhttp=new FXMLHttpRequest();
-fxhttp.open("PUT","./DB_API_Update_Guest.js",true);
+fxhttp.open("PUT","./Update_Guest",true);
 fxhttp.send(update_guest_json);
 var rep=fxhttp.onload();
 alert("Your details had been successfully updated!")
@@ -556,15 +494,108 @@ alert("Your details had been successfully updated!")
 
 }
 
-function Display_Add_Guest(){
+function Display_Add_Guest(){ 
     var add_guest_form=document.getElementById("add_guest_div");
     add_guest_form.classList.remove("remove");
     add_guest_form.classList.add("appear");
 }
-
+function Disappear_Add_Guest(){
+    var add_guest_form=document.getElementById("add_guest_div");
+    add_guest_form.classList.remove("appear");
+    add_guest_form.classList.add("remove");
+}
 function Print_Sum_Guest(){
-    var list_guest=document.getElementById("guest_event_list");
-    var totalGuestsElement = document.getElementById("total-guests");
-    var total_guests = list_guest.length;
-    totalGuestsElement.textContent = "Total guests: " + total_guests;
+   var totalGuestsElement = document.getElementById("total-guests");
+   var fxhttp=new FXMLHttpRequest();
+   fxhttp.open("GET","./GET_user",true); // get guest list of current user 
+   user_search_list={
+       type:"user",
+       name:"",
+       mail:current_user.mail,
+       password:""
+   }
+   var list_to_search_json=JSON.stringify(user_search_list);
+
+   
+   fxhttp.send(list_to_search_json);
+   var list_guest=fxhttp.onload();
+   var sum_guest=0;
+   if(list_guest!=null)
+   {
+    list_guest.forEach((guest)=>{
+        if(guest.coming==true){
+            var num_guest=parseInt(guest.family_member,10);
+            sum_guest+=num_guest;
+        }
+
+    })
+
+   }
+   totalGuestsElement.innerHTML = "Total guests: " + sum_guest;
+    
+}
+
+function Display_Guest_List_Page(){
+
+    var p_hello=document.getElementById("hello_user");
+    p_hello.innerHTML="Hello "+current_user.name;
+    var fxhttp=new FXMLHttpRequest();
+    fxhttp.open("GET","./GET_user",true);
+    user_search_list={
+        type:"user",
+        name:"",
+        mail:current_user.mail,
+        password:""
+    }
+    var list_to_search_json=JSON.stringify(user_search_list);
+
+    
+    fxhttp.send(list_to_search_json);
+    var list_guest=fxhttp.onload();
+  
+    if(list_guest!=null){
+        for(i=0;i<list_guest.length;i++){
+            var li = document.createElement("li");
+            var item_value = list_guest[i].last_name+" "+list_guest[i].first_name+": "+list_guest[i].family_member;
+            var t = document.createTextNode(item_value);
+            li.setAttribute('id',list_guest[i].mail)
+            li.setAttribute('class',"list_guest")
+            li.setAttribute('data-target', "details_guest");
+            li.classList.add("nav-link");
+            li.appendChild(t);
+            li.onclick=get_current_guest_id;
+            document.getElementById("guest_event_list").appendChild(li);
+        
+            li.addEventListener('click', app.nav);
+            var span = document.createElement("SPAN");
+            var txt = document.createTextNode("🗑");
+            span.className = "close";
+            span.appendChild(txt);
+            li.appendChild(span);
+            
+          
+
+         }
+         var close = document.getElementsByClassName("close");
+         for (i = 0; i < close.length; i++) {
+            close[i].onclick = Delete_Guest;
+            
+          }
+
+    }
+    Print_Sum_Guest();
+
+}
+
+function blocking(){
+    alert("you can try to login");
+    document.getElementById("userMail").disabled = false;
+    document.getElementById("userPw").disabled = false;
+    
+   
+}
+
+function Log_Out(){
+    max_essai_sign_in=0;
+    current_user=null;
 }

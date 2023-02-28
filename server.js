@@ -1,11 +1,8 @@
 
-//import * as DB_API from './DB_API.js';
-
-//var methods_array=["GET","POST","DELETE","PUT"]
  class Server{
     static carry_request(body, obj){
 
-        if(obj.method=="POST"){
+        if(obj.method=="POST"){ // add user or guest 
             var obj=JSON.parse(body)
             if(obj.type=="user"){
                 add_user(body)
@@ -22,7 +19,7 @@
 
         }
         else{
-            if((obj.method=="GET")&&(obj.url=="./GET_user.js")){
+            if((obj.method=="GET")&&(obj.url=="./GET_user")){// get list guest of current user 
                 var obj=JSON.parse(body)
             if((obj.type=="user")&&(obj.password=="")){
                 var list_guest=null;
@@ -44,7 +41,7 @@
                 
 
             }
-            if(obj.type=="user"){
+            if(obj.type=="user"){ // get current user 
                 var user=null;
                 user=get_user(body)
                 if(user!=null){
@@ -68,10 +65,10 @@
             
 
             }
-            if((obj.method=="GET")&&(obj.url=="./GET_guest.js"))
+            if((obj.method=="GET")&&(obj.url=="./GET_guest"))
             {
                 var guest=null;
-                guest=get_guest(body);
+                guest=get_guest(body); //get specific guest of current user 
                 if(guest!=null)
                 {
                     obj.status=200;
@@ -89,7 +86,7 @@
                 }
 
             }
-            if (obj.method == "DELETE" ){
+            if (obj.method == "DELETE" ){ // delete guest 
                 delete_guest(body);
                 obj.status=200;
                 obj.readyState=4;
@@ -97,7 +94,7 @@
                 obj.responseText="";
                 return obj;
             }
-            if(obj.method=="PUT"){
+            if(obj.method=="PUT"){ //updat guest details 
                 update_guest(body);
                 obj.status=200;
                 obj.readyState=4;

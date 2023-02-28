@@ -1,19 +1,16 @@
- class DB_API{
-    // constructor(){
-    //     return new DB_API();
-    // }
-}
+//  class DB_API{
+  
+// }
  var guest={
     type:"guest",
     last_name:'',
     first_name:'',
-    mail:'', // id de la personne
+    mail:'', // => guest id
     phone_number:'',
     family_member:0,
     coming:false,
 }
 
-//rajouter object user 
 var current_guest=null;
 var current_user=null;
 function Guest(last_name, first_name, mail, phone_number, family_number, coming, list_manager){
@@ -41,14 +38,14 @@ function add_guest(guest_json){
    
 }
 
-function delete_guest(two_mails){   //mail_array[0]==mail of guest to delete mail_arrau[1]==mail of current user
+function delete_guest(two_mails){   //mail_array[0]==mail of guest to delete mail_array[1]==mail of current user
     var mails_array = two_mails.split(" ");
     var list_guest = JSON.parse(localStorage.getItem(mails_array[1]));
     var index = list_guest.findIndex((obj)=>obj.mail == mails_array[0]);
     if (index>-1){
         list_guest.splice(index,1)
     }
-    localStorage.removeItem(mails_array[1]); // mail cest une string si cest obj rajouter .value
+    localStorage.removeItem(mails_array[1]); 
     if(list_guest.length!=0){
      
       localStorage.setItem(mails_array[1],JSON.stringify(list_guest));
@@ -62,12 +59,10 @@ function update_guest(guest_to_update_json){
     var list_guest_current_user=[];
     current_user=JSON.parse(localStorage.getItem("current_user"));
     list_guest_current_user=JSON.parse(localStorage.getItem(current_user.mail));
-    //var guest_to_remove=list_guest_current_user.find(guest=>guest.mail==guest_to_update_obj.mail);
     var index = list_guest_current_user.findIndex((obj)=>obj.mail ==guest_to_update_obj.mail);
     if (index>-1){
         list_guest_current_user.splice(index,1)
     }
-   // list_guest_current_user.pop(guest_to_remove);
     list_guest_current_user.push(guest_to_update_obj);
 
     localStorage.removeItem(current_user.mail);
@@ -87,7 +82,7 @@ function get_guest(two_mails){
 var user={
     type:"user",
     name:'',
-    mail:'',
+    mail:'', // => mail=id of user 
     password:''
 
 }
