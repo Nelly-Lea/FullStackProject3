@@ -119,24 +119,30 @@
     </template>
     <template class="page" id="about_us">
         <div id="about_us_div"  >
-            <!-- <h1>ABOUT US PAGE</h1> -->
+            <h1 id="about_us_title">ABOUT US</h1>
             <div class="navbar">
                 <nav>
                     <ul class="navbarul">
                         <li><a href="#" data-target="home" class="nav-link"> Home</a></li>
                         <li><a href="#" data-target="contact" class="nav-link" >  ❃ Contact</a></li>
-                        <li><a href="#" data-target="about_us" class="nav-link">  ❃ About Us</a></li>
                         <li><a href="#" data-target="sign_in" class="nav-link"> ❃ Sign In</a></li>
                         <li><a href="#" data-target="sign_up" class="nav-link">  ❃ Sign Up</a></li>
                     </ul>
                 </nav>
-            </div> 
+            </div>
+                <div class="text_about">
+                <p>Easy Plan is two friends idea that was founded in 2023 by 2 youung women
+                    Nelly and Lea to make event's guest planning easier. No more paper or 
+                    phone list, you'll be able in a few clicks to plan your event, update 
+                    the details of every guest and manage your party without headaches!  </p>
+                </div>
+            <!-- </div> 
             <ol>
                 <li><a href="#" data-target="home" class="nav-link">HOME</a></li>
                 <li><a href="#" data-target="sign_up" class="nav-link">SIGN_UP</a></li>
                 <li><a href="#" data-target="guest_list" class="nav-link">GUEST LIST PAGE</a></li>
             </ol>
-        </div>
+        </div> -->
     </template>
     <template class="page" id="sign_in">
         <div  id="sign_in_div" class = "sign_in"  >
@@ -248,7 +254,7 @@
                 <li><a href="#" data-target="sign_up" class="nav-link">SIGN_UP</a></li>
                 <li><a href="#" data-target="guest_list" class="nav-link">GUEST LIST PAGE</a></li>
             </ol> -->
-            <p id="guest_list_title">EasyPlan</p>
+            <p id="guest_list_title" class="guest_update">EasyPlan</p>
             <div class="navbar">
                 <nav>
                     <ul class="navbarul">
@@ -258,11 +264,15 @@
                        
                     </ul>
                 </nav>
+            <div>
+                 
+            </div>
             </div>
             <div id="username_div">
                 <p id="hello_user"></p>
                 <a href="#"  ><img id="log_out_icone" data-target="home" class="nav-link" src="./images/log_out.png"></a>
             </div><br><br>
+            <p id="total-guests"></p>
             <div id="add_guest">
                 
                 <div id="add_guest_div" class="remove">
@@ -330,14 +340,16 @@
         </div>
     </template>
     <template class="page" id="details_guest">
-        <div id="details_guest_div">
-            <ol>
-                <li><a href="#" data-target="home" class="nav-link">HOME</a></li>
-                <li><a href="#" data-target="sign_up" class="nav-link">SIGN_UP</a></li>
-                <li><a href="#" data-target="guest_list" class="nav-link">GUEST LIST PAGE</a></li>
-            </ol>
-
-            <div >
+        <div class="navbar">
+            <nav>
+                <ul class="navbarul">
+                    <li><a href="#" data-target="home" class="nav-link"> ❃ Home</a></li>
+                    <li><a href="#" data-target="contact" class="nav-link" > ❃ Contact</a></li>
+                    <li><a href="#" data-target="about_us" class="nav-link"> ❃ About Us</a></li>
+                   
+                </ul>
+            </nav>
+        </div>
                 <form name='form-details' id="add_guest_form">
                     <div class="details-htm">
 

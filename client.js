@@ -488,8 +488,8 @@ function Add_Guest(){
       
     }
 
-   
-   
+    var totalGuests = list_guest.length;
+    totalGuestsElement.textContent = "Total guests: " + totalGuests; 
    
 }
 function Delete_Guest(){
@@ -560,4 +560,11 @@ function Display_Add_Guest(){
     var add_guest_form=document.getElementById("add_guest_div");
     add_guest_form.classList.remove("remove");
     add_guest_form.classList.add("appear");
+}
+
+function Print_Sum_Guest(){
+    var list_guest=document.getElementById("guest_event_list");
+    var totalGuestsElement = document.getElementById("total-guests");
+    var total_guests = list_guest.length;
+    totalGuestsElement.textContent = "Total guests: " + total_guests;
 }

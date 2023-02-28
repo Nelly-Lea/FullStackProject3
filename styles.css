@@ -322,4 +322,23 @@ body{
     top: 0;
     padding: 12px 16px 12px 16px;
 }
+
+/*Guest update*/
+.guest_update{
+  text-align: center;
+}
+
+/*About us*/
+.text_about{
+  font-family: 'Tangerine'; 
+    margin: auto;
+    font-size: 50px;
+    text-align: center;
+    align-content: center;
+}
+#about_us_title{
+  font-family: 'Tangerine'; 
+  font-size: 100px;
+  text-align: center;
+}
   
