@@ -218,6 +218,7 @@ function check(){ //sign in function
 
     var fxhttp=new FXMLHttpRequest();
     fxhttp.open("GET","./GET_user",true);
+    
     fxhttp.send(user_to_search_json);
     var rep=fxhttp.onload();
     current_user=rep;

@@ -9,12 +9,14 @@
                 obj.status=200;
                 obj.readyState=4;
                 return obj;
+               
             }
             if(obj.type=="guest"){
                 add_guest(body)
                 obj.status=200;
                 obj.readyState=4;
                 return obj;
+               
             }
 
         }
@@ -29,7 +31,8 @@
                     obj.readyState=4;
                     obj.response=list_guest;
                     obj.responseText=JSON.stringify(list_guest);
-                    return obj;
+                   return obj;
+                    
                 }else{
                     obj.status=404;
                     obj.readyState=4;

@@ -26,6 +26,7 @@ class FXMLHttpRequest{
                 }
               }
             };
+
          }
         else{
             this.onload =()=>{
@@ -39,6 +40,7 @@ class FXMLHttpRequest{
         }
 
     }
+
     send(body){ //send request to network
     var fxmlhttp=null;
     fxmlhttp=Network.send(body, this); 
@@ -50,5 +52,5 @@ class FXMLHttpRequest{
      
         
     }
-
+    
 }
