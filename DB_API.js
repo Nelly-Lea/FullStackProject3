@@ -1,6 +1,4 @@
-//  class DB_API{
-  
-// }
+
  var guest={
     type:"guest",
     last_name:'',

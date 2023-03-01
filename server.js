@@ -94,7 +94,7 @@
                 obj.responseText="";
                 return obj;
             }
-            if(obj.method=="PUT"){ //updat guest details 
+            if(obj.method=="PUT"){ //update guest details 
                 update_guest(body);
                 obj.status=200;
                 obj.readyState=4;

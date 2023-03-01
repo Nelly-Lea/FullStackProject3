@@ -35,8 +35,8 @@ var button_add_guest=document.getElementById("button_add_guest")
     },
     nav: function(ev){
         if(delete_guest_bool){
-            delete_guest_bool=false;
-            return;
+            delete_guest_bool=false; 
+            return; // stay in guest_list page
         }
          ev.preventDefault();
          let currentPage= ev.target.getAttribute('data-target');
@@ -60,7 +60,7 @@ var button_add_guest=document.getElementById("button_add_guest")
 
         if(ev.target.id=="guest_list"){
 
-            Display_Guest_List_Page();
+            Display_Guest_List_Page(); 
            
         }
         if(ev.target.id=="details_guest"){
@@ -70,7 +70,7 @@ var button_add_guest=document.getElementById("button_add_guest")
      
     },
     poppin: function(ev){
-        if(current_page=="#sign_in"){
+        if(current_page=="#sign_in"){  // error in sign
             if(error_sign_in==true){
                 error_sign_in=false;
                 var userEmail = document.getElementById('userMail');
@@ -434,7 +434,7 @@ if(firstname_guest.value.length == 0){
 function Delete_Guest(){
     var parent = this.parentElement;
     var mail = parent.id;
-    var two_mails = mail + " " + current_user.mail
+    var two_mails = mail + " " + current_user.mail  //guest mail + current user mail
     var fxhttp=new FXMLHttpRequest();
     fxhttp.open("DELETE","./DB_API.js",true);
     fxhttp.send(two_mails);
@@ -552,6 +552,14 @@ function Display_Guest_List_Page(){
     
     fxhttp.send(list_to_search_json);
     var list_guest=fxhttp.onload();
+    // if(list_guest!=null)
+    // {
+    //     list_guest.sort(function(a,b){
+    //         return a.last_name.localeCompare(b.last_name);
+    //     })
+
+    // }
+    
   
     if(list_guest!=null){
         for(i=0;i<list_guest.length;i++){
