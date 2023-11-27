@@ -13,12 +13,12 @@ This project is a website designed to manage guest list for an event. The site a
 
 ## Goals and Features of this Project
 
-- End-to-end website comprising both client and server components.
-- Utilization of Single Page Application (SPA) architecture for the client-side.
-- Data storage implemented in the local storage.
-- Access to the database is only through the server using the DB API.
-- Server-client communication through FAJAX simulations
-- REST_API operations in JSON format
+- End-to-end website comprising both client and server components.  
+- Utilization of Single Page Application (SPA) architecture for the client-side.  
+- Data storage implemented in the local storage.  
+- Access to the database is only through the server using the DB API.  
+- Server-client communication through FAJAX simulations  
+- REST_API operations in JSON format  
 
 
 ## Credits
