@@ -9,7 +9,7 @@
 
 ## Description
 
-This project is a website designed to manage guest list for an event. The site allows users to create an account, log in, and then add, delete, modify the number of guests, and update their status (if there are coming to the event or not). Additionally, it automatically displays the total number of guests.
+This project is a website designed to manage a guest list for an event. The site allows users to create an account, log in, and then add, delete, modify the number of guests, and update their status (if there are coming to the event or not). Additionally, it automatically displays the total number of guests.
 
 ## Goals and Features of this Project
 
