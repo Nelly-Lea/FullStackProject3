@@ -23,5 +23,5 @@ This project is a website designed to manage a guest list for an event. The site
 
 ## Credits
 
-This project was co-developed by [Lea Ben Soussan (Scetbon)](https://github.com/LeaScetbon) and [NellyLeaAmar](https://github.com/Nelly-Lea).
+This project was co-developed by [Lea Ben Soussan (Scetbon)](https://github.com/LeaScetbon) and [Nelly Lea Amar](https://github.com/Nelly-Lea).
 
